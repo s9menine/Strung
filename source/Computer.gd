@@ -9,11 +9,14 @@ var target_rhythms := []
 var player_pitches := []
 var is_player_playing := false
 
+signal teaching_started
+signal teaching_finished
+
 func _ready() -> void:
 	pass
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("interact"): teach()
+	if event.is_action_pressed("interact"): repeat()
 
 func advance():
 	player_pitches.clear()
@@ -25,6 +28,7 @@ func advance():
 	teach()
 
 func teach():
+	emit_signal("teaching_started")
 	print("Current indicies are: " + str(pitches_index) + ", " + str(rhythms_index))
 	if pitches_index >= $Course.LESSONS.size():
 		graduate()
@@ -35,13 +39,14 @@ func teach():
 	var i := 0
 	while i <= target_pitches.size() - 1:
 		var _note_pitch = target_pitches[i]
-		$Instrument.play_note_atk(_note_pitch)
-		$Instrument.play_note_sus(_note_pitch)
+		$Instrument.play_note_atk(_note_pitch, "Computer")
+		$Instrument.play_note_sus(_note_pitch, "Computer")
 		var _rhythm:float = rhythm2secs(target_rhythms[i])
 		yield(get_tree().create_timer(_rhythm),"timeout")
-		$Instrument.stop_note_sus()
+		$Instrument.stop_note_sus("Computer")
 		yield(get_tree().create_timer(rhythm2secs(1)),"timeout")
 		i += 1
+	emit_signal("teaching_finished")
 
 func _on_Player_note_played(note_pitch):
 	is_player_playing = true
@@ -64,7 +69,7 @@ func _on_Player_note_released() -> void:
 func acknowledge():
 	print("Acknowledged!")
 	yield(get_tree().create_timer(rhythm2secs(2)), "timeout")
-	$AudioStreamPlayer.stream = $Course.VOCALS[0]
+	$AudioStreamPlayer.stream = $Course.ACKNOWLEDGE
 	$AudioStreamPlayer.play()
 	yield(get_tree().create_timer(rhythm2secs(2)), "timeout")
 	$AudioStreamPlayer.play()
@@ -73,7 +78,7 @@ func acknowledge():
 func graduate():
 	print("Graduated!")
 	target_pitches = [16]
-	$AudioStreamPlayer.stream = $Course.VOCALS[0]
+	$AudioStreamPlayer.stream = $Course.GRADUATE
 	$AudioStreamPlayer.play()
 	yield(get_tree().create_timer(rhythm2secs(1)), "timeout")
 	$AudioStreamPlayer.play()
@@ -82,6 +87,10 @@ func graduate():
 	yield(get_tree().create_timer(rhythm2secs(1)), "timeout")
 	$AudioStreamPlayer.play()
 	yield(get_tree().create_timer(rhythm2secs(1)), "timeout")
+	
+func repeat():
+	player_pitches.clear()
+	teach()
 	
 func rhythm2secs(rhythm: int) -> float:
 	var secs: float

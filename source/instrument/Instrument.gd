@@ -3,9 +3,10 @@ extends Node
 export var volume_range: float = -3.0
 
 var rng = RandomNumberGenerator.new()
-var art_ext_last: bool = false
+#var art_ext_last: bool = false
 var sus_base_playing := []
 var sus_ext_playing := []
+var release_pitch := []
 
 func _ready() -> void:
 	rng.randomize()
@@ -13,7 +14,7 @@ func _ready() -> void:
 func play_note_atk(note_pitch, bus = "Attack"):
 	if note_pitch == 0: return
 	var stream: Resource = $NoteAtk.notes_array[note_pitch]
-#	print_filename(stream)	
+#	print_filename(stream)
 	var _player := AudioStreamPlayer.new()
 	add_child(_player)
 	_player.stream = stream
@@ -25,7 +26,6 @@ func play_note_atk(note_pitch, bus = "Attack"):
 
 func play_note_sus(note_pitch: int, bus = "Sustain"):
 	if note_pitch == 0: return
-#	notes_playing.append(note_pitch)
 	var stream_base: Resource = $NoteSusBase.notes_array[note_pitch]
 	var player_base := AudioStreamPlayer.new()
 	add_child(player_base)
@@ -35,6 +35,7 @@ func play_note_sus(note_pitch: int, bus = "Sustain"):
 	player_base.set_bus(bus)
 	player_base.play()
 	sus_base_playing.append(player_base)
+	release_pitch.append(note_pitch)
 	yield(player_base, "finished")
 	player_base.queue_free()
 	
@@ -51,19 +52,26 @@ func play_note_sus(note_pitch: int, bus = "Sustain"):
 #		yield(player_ext, "finished")
 #		player_ext.queue_free()
 
-func stop_note_sus():
+func stop_note_sus(performer: String):
 	if sus_base_playing == []:
 		return
 	else:
+		var bus: String
+		if performer == "Player": bus = "Release"
+		elif performer == "Computer": bus = "Computer"
+		play_note_rel(release_pitch.pop_front(), bus)
+		var fade := Tween.new()
+		add_child(fade)		
 		var player_base = sus_base_playing.pop_front()
-		
+#		fade.interpolate_property(player_base, NodePath(str(player_base.get_path()) + ":volume_db"), null, -80.0, 0.382, Tween.TRANS_SINE, Tween.EASE_OUT)
+#		yield(fade, "tween_completed")
 		player_base.stop() # TODO: Change stop to rapid fadeout using tween, and also play releas sample
 		player_base.queue_free()
-		if art_ext_last == true:
-			var player_ext = sus_ext_playing.pop_front()
-			player_ext.stop()
-			player_ext.queue_free()
-			art_ext_last = false
+#		if art_ext_last == true:
+#			var player_ext = sus_ext_playing.pop_front()
+#			player_ext.stop()
+#			player_ext.queue_free()
+#			art_ext_last = false
 			
 #	if art_ext:
 #		$NoteSusBase.notes_array[note_pitch]
@@ -72,9 +80,18 @@ func stop_note_sus():
 #		$NoteSusBase.notes_array[note_pitch]
 #	play_note_rel(notes_playing.pop_front())
 	
-func play_note_rel(note_pitch):
-		$NoteRelBase.notes_array[note_pitch]
-		$NoteRelExt.notes_array[note_pitch]
+func play_note_rel(note_pitch: int, bus: String):
+	var stream: Resource = $NoteRelBase.notes_array[note_pitch]
+#	print_filename(stream)
+	var _player_base := AudioStreamPlayer.new()
+	add_child(_player_base)
+	_player_base.stream = stream
+	_player_base.volume_db = rng.randf_range(volume_range, 0)
+	_player_base.set_bus(bus)
+	_player_base.play()
+	yield(_player_base, "finished")
+	_player_base.queue_free()
+#	$NoteRelExt.notes_array[note_pitch]
 
 func play_sound_handling(sound: String, bus: String = "Handling"):
 	# Determine which handling sound to play

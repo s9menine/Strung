@@ -45,8 +45,12 @@ func _input(event) -> void:
 	if Input.is_action_just_released("art_up"):
 		art_ext = false
 	if Input.is_action_just_pressed("art_down"):
+		AudioServer.get_bus_effect(AudioServer.get_bus_index("Instrument"), 0).mix = 1
+		print(AudioServer.get_bus_effect(AudioServer.get_bus_index("Instrument"), 0).mix)
 		art_damp = true
 	if Input.is_action_just_released("art_down"):
+		AudioServer.get_bus_effect(AudioServer.get_bus_index("Instrument"), 0).mix = 0
+		print(AudioServer.get_bus_effect(AudioServer.get_bus_index("Instrument"), 0).mix)
 		art_damp = false
 	if Input.is_action_just_pressed("art_left"):
 		art_stac = true
@@ -73,10 +77,10 @@ func _input(event) -> void:
 #	Fade out Sustain sounds and play Release sounds
 	if Input.is_action_just_released("hammer") and is_sustaining == true :
 		emit_signal("note_released")
-		$Instrument.stop_note_sus()
+		$Instrument.stop_note_sus("Player")
 		is_sustaining = false
 		
-#	TODO Implement robust state machine for sustain-release
+#	TODO Harmonic extensions
 
 #	TODO Staccato
 
