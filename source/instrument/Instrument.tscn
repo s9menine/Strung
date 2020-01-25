@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://source/instrument/Instrument.gd" type="Script" id=1]
+[ext_resource path="res://source/instrument/NoteAtk.gd" type="Script" id=2]
+[ext_resource path="res://source/instrument/NoteSusBase.gd" type="Script" id=3]
+[ext_resource path="res://source/instrument/NoteSusExt.gd" type="Script" id=4]
+[ext_resource path="res://source/instrument/NoteRelBase.gd" type="Script" id=5]
+[ext_resource path="res://source/instrument/NoteRelExt.gd" type="Script" id=6]
+[ext_resource path="res://source/instrument/Handling.gd" type="Script" id=7]
+
+[node name="Instrument" type="Node"]
+script = ExtResource( 1 )
+
+[node name="NoteAtk" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="NoteSusBase" type="Node" parent="." groups=[
+"NoteSus",
+]]
+script = ExtResource( 3 )
+
+[node name="NoteSusExt" type="Node" parent="." groups=[
+"NoteSus",
+]]
+script = ExtResource( 4 )
+
+[node name="NoteRelBase" type="Node" parent="." groups=[
+"NoteRel",
+]]
+script = ExtResource( 5 )
+
+[node name="NoteRelExt" type="Node" parent="." groups=[
+"NoteRel",
+]]
+script = ExtResource( 6 )
+
+[node name="Handling" type="Node" parent="."]
+script = ExtResource( 7 )

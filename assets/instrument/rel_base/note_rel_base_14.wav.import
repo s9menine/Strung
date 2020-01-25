@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/note_rel_base_14.wav-e3a7fa8715d1f01a29001e90a2e0ec25.sample"
+
+[deps]
+
+source_file="res://assets/instrument/rel_base/note_rel_base_14.wav"
+dest_files=[ "res://.import/note_rel_base_14.wav-e3a7fa8715d1f01a29001e90a2e0ec25.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=false
+edit/loop=false
+compress/mode=0

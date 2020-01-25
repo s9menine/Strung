@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/note_sus_base_05.wav-d7be5c6e066b200d601e85fc93cf5aa8.sample"
+
+[deps]
+
+source_file="res://assets/instrument/sus_base/note_sus_base_05.wav"
+dest_files=[ "res://.import/note_sus_base_05.wav-d7be5c6e066b200d601e85fc93cf5aa8.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=false
+edit/loop=false
+compress/mode=0

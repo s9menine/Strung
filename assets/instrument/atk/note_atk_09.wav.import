@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/note_atk_09.wav-9a989d7aff8d44e851111929600ae002.sample"
+
+[deps]
+
+source_file="res://assets/instrument/atk/note_atk_09.wav"
+dest_files=[ "res://.import/note_atk_09.wav-9a989d7aff8d44e851111929600ae002.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=false
+edit/loop=false
+compress/mode=0
