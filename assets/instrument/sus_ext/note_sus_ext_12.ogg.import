@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/note_sus_ext_12.ogg-1265e4511f350734bf4b1a07e59a2c03.oggstr"
+
+[deps]
+
+source_file="res://assets/instrument/sus_ext/note_sus_ext_12.ogg"
+dest_files=[ "res://.import/note_sus_ext_12.ogg-1265e4511f350734bf4b1a07e59a2c03.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -70,11 +70,12 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_released("hammer") and is_sustaining == true :
 		$Instrument.stop_note_sus()
 		is_sustaining = false
+		
 #	TODO Implement robust state machine for sustain-release
 
-#	Staccato
+#	TODO Staccato
 
-#	Vibrato
+#	TODO Vibrato
 
 #	if Input.is_action_pressed("key_1"): emit_signal("key_pressed", "key_1")
 #	if Input.is_action_pressed("key_2"): emit_signal("key_pressed", "key_2")
