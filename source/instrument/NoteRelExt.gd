@@ -1,6 +1,6 @@
 extends Node
 
-var notes_array: Array = [ 
+const notes_array: Array = [ 
 	0,
 	preload("res://assets/instrument/rel_ext/note_rel_ext_01.wav"),
 	preload("res://assets/instrument/rel_ext/note_rel_ext_02.wav"),

@@ -4,13 +4,13 @@ export var volume_range: float = -3.0
 
 var rng = RandomNumberGenerator.new()
 var art_ext_last: bool = false
-var sus_base_playing = []
-var sus_ext_playing = []
+var sus_base_playing := []
+var sus_ext_playing := []
 
 func _ready() -> void:
 	rng.randomize()
 
-func play_note_atk(note_pitch):
+func play_note_atk(note_pitch, bus = "Attack"):
 	if note_pitch == 0: return
 	var stream: Resource = $NoteAtk.notes_array[note_pitch]
 #	print_filename(stream)	
@@ -18,12 +18,12 @@ func play_note_atk(note_pitch):
 	add_child(_player)
 	_player.stream = stream
 	_player.volume_db = rng.randf_range(volume_range, 0)
-	_player.set_bus("Attack")
+	_player.set_bus(bus)
 	_player.play()
 	yield(_player, "finished")
 	_player.queue_free()
 
-func play_note_sus(note_pitch: int, art_ext: bool):
+func play_note_sus(note_pitch: int, bus = "Sustain"):
 	if note_pitch == 0: return
 #	notes_playing.append(note_pitch)
 	var stream_base: Resource = $NoteSusBase.notes_array[note_pitch]
@@ -32,30 +32,31 @@ func play_note_sus(note_pitch: int, art_ext: bool):
 	player_base.stream = stream_base
 	player_base.volume_db = rng.randf_range(volume_range, 0)
 #	player_base.pitch_scale = rng.randf_range(0.99, 1.01) # nope, causes phasing
-	player_base.set_bus("Sustain")
+	player_base.set_bus(bus)
 	player_base.play()
 	sus_base_playing.append(player_base)
 	yield(player_base, "finished")
 	player_base.queue_free()
 	
-	if art_ext:
-		art_ext_last = true
-		var stream_ext: Resource = $NoteSusExt.notes_array[note_pitch]
-		var player_ext := AudioStreamPlayer.new()
-		add_child(player_ext)
-		player_ext.stream = stream_ext
-		player_ext.volume_db = rng.randf_range(volume_range, 0)
-		player_ext.set_bus("Sustain")
-		player_ext.play()
-		sus_ext_playing.append(player_ext)
-		yield(player_ext, "finished")
-		player_ext.queue_free()
+#	if art_ext:
+#		art_ext_last = true
+#		var stream_ext: Resource = $NoteSusExt.notes_array[note_pitch]
+#		var player_ext := AudioStreamPlayer.new()
+#		add_child(player_ext)
+#		player_ext.stream = stream_ext
+#		player_ext.volume_db = rng.randf_range(volume_range, 0)
+#		player_ext.set_bus(bus)
+#		player_ext.play()
+#		sus_ext_playing.append(player_ext)
+#		yield(player_ext, "finished")
+#		player_ext.queue_free()
 
 func stop_note_sus():
 	if sus_base_playing == []:
 		return
 	else:
 		var player_base = sus_base_playing.pop_front()
+		
 		player_base.stop() # TODO: Change stop to rapid fadeout using tween, and also play releas sample
 		player_base.queue_free()
 		if art_ext_last == true:
@@ -63,6 +64,7 @@ func stop_note_sus():
 			player_ext.stop()
 			player_ext.queue_free()
 			art_ext_last = false
+			
 #	if art_ext:
 #		$NoteSusBase.notes_array[note_pitch]
 #		$NoteSusExt.notes_array[note_pitch]
@@ -70,11 +72,11 @@ func stop_note_sus():
 #		$NoteSusBase.notes_array[note_pitch]
 #	play_note_rel(notes_playing.pop_front())
 	
-#func play_note_rel(note_id):
-#		$NoteRelBase.notes_array[note_id]
-#		$NoteRelExt.notes_array[note_id]
+func play_note_rel(note_pitch):
+		$NoteRelBase.notes_array[note_pitch]
+		$NoteRelExt.notes_array[note_pitch]
 
-func play_sound_handling(sound: String, bus: String):
+func play_sound_handling(sound: String, bus: String = "Handling"):
 	# Determine which handling sound to play
 	var stream: Resource
 	if sound == "key_press" :
@@ -88,7 +90,7 @@ func play_sound_handling(sound: String, bus: String):
 	elif sound == "hammer_strike" :
 		stream = $Handling.hammer_strike() # this function alternates between the two strike samples
 	
-	# Create AudioStreamPlayer node, add it to SceneTree, play it, destroy it	
+	# Create AudioStreamPlayer node, add it to SceneTree, play it, destroy it
 	var _player := AudioStreamPlayer.new()
 	add_child(_player)
 	_player.stream = stream
@@ -99,6 +101,7 @@ func play_sound_handling(sound: String, bus: String):
 	_player.play()
 	yield(_player, "finished") # "finished" is name of signal emitted by AudioStreamPlayer
 	_player.queue_free()
+
 
 func print_filename(file: Resource):
 	print("File played is: " + file.resource_path)

@@ -8,12 +8,15 @@ var art_trem: bool = false
 
 var is_sustaining: bool = false
 
+signal note_played
+signal note_released
+
 #signal key_pressed
 #signal key_released
 #signal hammer_pressed
 #signal hammer_released
 
-func _process(delta: float) -> void:
+func _input(event) -> void:
 #	Play handling sounds
 	if Input.is_action_just_pressed("key_1"):
 		$Instrument.play_sound_handling("key_press", "Key 1")
@@ -32,9 +35,9 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_released("key_4"):
 		$Instrument.play_sound_handling("key_release", "Key 4")
 	if Input.is_action_just_pressed("hammer"):
-		$Instrument.play_sound_handling("hammer_press", "Handling")
+		$Instrument.play_sound_handling("hammer_press")
 	if Input.is_action_just_released("hammer"):
-		$Instrument.play_sound_handling("hammer_release", "Handling")
+		$Instrument.play_sound_handling("hammer_release")
 	
 #	Detect articulation keys
 	if Input.is_action_just_pressed("art_up"):
@@ -60,14 +63,16 @@ func _process(delta: float) -> void:
 		if note_pitch == 0: 
 			return
 		else:
-			$Instrument.play_sound_handling("hammer_strike", "Handling")
-			$Instrument.play_note_sus(note_pitch, art_ext)
-			is_sustaining = true			
+			emit_signal("note_played", note_pitch)
+			$Instrument.play_sound_handling("hammer_strike")
+			$Instrument.play_note_sus(note_pitch)
+			is_sustaining = true
 			if art_damp == false: # if not dampened, play attack also
 				$Instrument.play_note_atk(note_pitch)
 
 #	Fade out Sustain sounds and play Release sounds
 	if Input.is_action_just_released("hammer") and is_sustaining == true :
+		emit_signal("note_released")
 		$Instrument.stop_note_sus()
 		is_sustaining = false
 		
@@ -88,12 +93,12 @@ func _process(delta: float) -> void:
 #	if Input.is_action_pressed("hammer"): emit_signal("key_pressed", "hammer")
 #	if Input.is_action_just_released("hammer"): emit_signal("key_released", "hammer")
 
-# Self-explanatory, determines which note pitch to play from keys held, basically binary
+# Determines which note pitch to play from keys held, basically binary
 # Fingering to play scale from lowest to highest:
 # A, F, AF, D, AD, DF, ADF, S, AS, SF, ASF, SD, ASD, SDF, ASDF
 func _get_note_pitch() -> int:
 	var key_1: = int(Input.is_action_pressed("key_1")) # A +1
-	var key_2: = int(Input.is_action_pressed("key_2")) # S +8 (high/low register switch)
+	var key_2: = int(Input.is_action_pressed("key_2")) # S +8
 	var key_3: = int(Input.is_action_pressed("key_3")) # D +4
 	var key_4: = int(Input.is_action_pressed("key_4")) # F +2
 	var note_pitch: int = key_1 + key_2 * 8 + key_3 * 4 + key_4 * 2

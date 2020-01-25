@@ -1,6 +1,6 @@
 extends Node
 
-var notes_array: Array = [ 
+const notes_array: Array = [ 
 	0,
 	preload("res://assets/instrument/sus_ext/note_sus_ext_01.ogg"),
 	preload("res://assets/instrument/sus_ext/note_sus_ext_02.ogg"),

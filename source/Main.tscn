@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://source/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/visual/Merriweather-Black.ttf" type="DynamicFontData" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://assets/visual/Merriweather-Regular.ttf" type="DynamicFontData" id=23]
 [ext_resource path="res://source/Computer.gd" type="Script" id=24]
 [ext_resource path="res://source/Main.gd" type="Script" id=25]
+[ext_resource path="res://source/Course.gd" type="Script" id=26]
 
 [sub_resource type="DynamicFont" id=1]
 size = 100
@@ -524,5 +525,14 @@ Instances its own Instrument to
 Handles level/lesson progression.
 Doesn't play handling sounds."
 }
+time = 2.618
+
+[node name="Course" type="Node" parent="Computer"]
+script = ExtResource( 26 )
 
 [node name="Instrument" parent="Computer" instance=ExtResource( 3 )]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Computer"]
+bus = "Voice"
+[connection signal="note_played" from="Player" to="Computer" method="_on_Player_note_played"]
+[connection signal="note_released" from="Player" to="Computer" method="_on_Player_note_released"]
