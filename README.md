@@ -1,15 +1,17 @@
-﻿STRUNG
+﻿**STRUNG**
 
 an audiogame
+
+https://s9menine.itch.io/strung
 
 -----,-----
 
 Controls:
 
-Use A, S, D, F, and the Spacebar keys to play the Instrument. You should hear things happening when using these keys, by themselves or in certain combinations. Experiment!
-Press R, Tab, or Enter to let your friend Ul'tsoo repeat a phrase.
-The Arrow Keys (Up, Down, Left, Right) can also change how things sound, but are optional and not required to finish the game.
-Hold the ESC key to exit the game.
+- Use A, S, D, F, and the Spacebar keys to play the Instrument. You should hear things happening when using these keys, by themselves or in certain combinations. Experiment!
+- Press R to interact with the computer. Tab and Enter will also work.
+- The Arrow Keys (Up, Down, Left, Right) can also change how things sound, but are optional and not required to finish the game.
+- Hold the ESC key to exit the game.
 
 -----,-----
 
