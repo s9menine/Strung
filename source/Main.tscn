@@ -525,7 +525,7 @@ Instances its own Instrument to
 Handles level/lesson progression.
 Doesn't play handling sounds."
 }
-time = 2.618
+time = 2.4
 
 [node name="Course" type="Node" parent="Computer"]
 script = ExtResource( 26 )
@@ -534,6 +534,8 @@ script = ExtResource( 26 )
 volume_range = -2.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Computer"]
-bus = "Voice"
+bus = "System"
 [connection signal="note_played" from="Player" to="Computer" method="_on_Player_note_played"]
 [connection signal="note_released" from="Player" to="Computer" method="_on_Player_note_released"]
+[connection signal="acknowledged" from="Computer" to="Player" method="_on_Computer_acknowledged"]
+[connection signal="teaching_finished" from="Computer" to="Player" method="_on_Computer_teaching_finished"]

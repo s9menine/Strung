@@ -11,6 +11,8 @@ var is_sustaining: bool = false
 signal note_played
 signal note_released
 
+var is_computer_busy: bool = false
+
 #signal key_pressed
 #signal key_released
 #signal hammer_pressed
@@ -44,18 +46,19 @@ func _input(event) -> void:
 		art_ext = true
 	if Input.is_action_just_released("art_up"):
 		art_ext = false
+		
 	if Input.is_action_just_pressed("art_down"):
-		AudioServer.get_bus_effect(AudioServer.get_bus_index("Instrument"), 0).mix = 1
-		print(AudioServer.get_bus_effect(AudioServer.get_bus_index("Instrument"), 0).mix)
+		$Instrument.dampen()
 		art_damp = true
 	if Input.is_action_just_released("art_down"):
-		AudioServer.get_bus_effect(AudioServer.get_bus_index("Instrument"), 0).mix = 0
-		print(AudioServer.get_bus_effect(AudioServer.get_bus_index("Instrument"), 0).mix)
+		$Instrument.undampen()
 		art_damp = false
+		
 	if Input.is_action_just_pressed("art_left"):
 		art_stac = true
 	if Input.is_action_just_released("art_left"):
 		art_stac = false
+		
 	if Input.is_action_just_pressed("art_right"):
 		art_trem = true
 	if Input.is_action_just_released("art_right"):
@@ -71,7 +74,7 @@ func _input(event) -> void:
 			$Instrument.play_sound_handling("hammer_strike")
 			$Instrument.play_note_sus(note_pitch)
 			is_sustaining = true
-			if art_damp == false: # if not dampened, play attack also
+			if art_damp == false: # if not dampened, also play attack sample
 				$Instrument.play_note_atk(note_pitch)
 
 #	Fade out Sustain sounds and play Release sounds
@@ -97,9 +100,15 @@ func _input(event) -> void:
 #	if Input.is_action_pressed("hammer"): emit_signal("key_pressed", "hammer")
 #	if Input.is_action_just_released("hammer"): emit_signal("key_released", "hammer")
 
+func _on_Computer_acknowledged() -> void:
+	is_computer_busy = true
+
+func _on_Computer_teaching_finished() -> void:
+	is_computer_busy = false
+	
 # Determines which note pitch to play from keys held, basically binary
 # Fingering to play scale from lowest to highest:
-# A, F, AF, D, AD, DF, ADF, S, AS, SF, ASF, SD, ASD, SDF, ASDF
+# A, F, AF, D, AD, DF, ADF, S, AS, SF, ASF, SD, ASD, SDF, ASDF	
 func _get_note_pitch() -> int:
 	var key_1: = int(Input.is_action_pressed("key_1")) # A +1
 	var key_2: = int(Input.is_action_pressed("key_2")) # S +8

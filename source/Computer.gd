@@ -9,6 +9,7 @@ var target_rhythms := []
 var player_pitches := []
 var is_player_playing := false
 
+signal acknowledged
 signal teaching_started
 signal teaching_finished
 
@@ -29,7 +30,7 @@ func advance():
 
 func teach():
 	emit_signal("teaching_started")
-	print("Current indicies are: " + str(pitches_index) + ", " + str(rhythms_index))
+#	print("Current indicies are: " + str(pitches_index) + ", " + str(rhythms_index))
 	if pitches_index >= $Course.LESSONS.size():
 		graduate()
 		return
@@ -50,14 +51,18 @@ func teach():
 
 func _on_Player_note_played(note_pitch):
 	is_player_playing = true
-	yield(get_tree().create_timer(rhythm2secs(1)),"timeout")
-	if is_player_playing == false: return
-	player_pitches.append(note_pitch)
-	player_pitches.invert()
-	player_pitches.resize(target_pitches.size())
-	player_pitches.invert()
-	print("Current player sequence is: " + str(player_pitches))
-	if target_pitches == player_pitches:
+	# count too short taps as mistakes
+	yield(get_tree().create_timer(rhythm2secs(0)),"timeout")
+	if is_player_playing == false: 
+		player_pitches.clear() 
+		return
+	else:
+		player_pitches.append(note_pitch)
+		player_pitches.invert()
+		player_pitches.resize(target_pitches.size())
+		player_pitches.invert()
+		print("Current player sequence is: " + str(player_pitches))
+	if player_pitches == target_pitches and player_pitches != []:
 		yield(get_parent().get_node("Player"), "note_released")
 		acknowledge()
 		advance()
@@ -68,25 +73,16 @@ func _on_Player_note_released() -> void:
 		
 func acknowledge():
 	print("Acknowledged!")
+	emit_signal("acknowledged")
 	yield(get_tree().create_timer(rhythm2secs(2)), "timeout")
 	$AudioStreamPlayer.stream = $Course.ACKNOWLEDGE
 	$AudioStreamPlayer.play()
-	yield(get_tree().create_timer(rhythm2secs(2)), "timeout")
-	$AudioStreamPlayer.play()
-	yield(get_tree().create_timer(rhythm2secs(2)), "timeout")
 
 func graduate():
 	print("Graduated!")
-	target_pitches = [16]
+	target_pitches = [16] # an impossible note to play
 	$AudioStreamPlayer.stream = $Course.GRADUATE
 	$AudioStreamPlayer.play()
-	yield(get_tree().create_timer(rhythm2secs(1)), "timeout")
-	$AudioStreamPlayer.play()
-	yield(get_tree().create_timer(rhythm2secs(1)), "timeout")
-	$AudioStreamPlayer.play()
-	yield(get_tree().create_timer(rhythm2secs(1)), "timeout")
-	$AudioStreamPlayer.play()
-	yield(get_tree().create_timer(rhythm2secs(1)), "timeout")
 	
 func repeat():
 	player_pitches.clear()
@@ -107,6 +103,8 @@ func rhythm2secs(rhythm: int) -> float:
 			secs = time * 0.618 * 0.618 * 0.618 * 0.618
 		1:
 			secs = time * 0.618 * 0.618 * 0.618 * 0.618 * 0.618
+		0:
+			secs = time * 0.618 * 0.618 * 0.618 * 0.618 * 0.618 * 0.618
 		_: # fallback, same value as "3"
 			secs = time * 0.618 * 0.618 * 0.618
 	return secs

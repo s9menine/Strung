@@ -10,6 +10,7 @@ var release_pitch := []
 
 func _ready() -> void:
 	rng.randomize()
+	$AnimationPlayer.play("art_damp_reset")
 
 func play_note_atk(note_pitch, bus = "Attack"):
 	if note_pitch == 0: return
@@ -27,13 +28,14 @@ func play_note_atk(note_pitch, bus = "Attack"):
 func play_note_sus(note_pitch: int, bus = "Sustain"):
 	if note_pitch == 0: return
 	var stream_base: Resource = $NoteSusBase.notes_array[note_pitch]
-	var player_base := AudioStreamPlayer.new()
+	var player_base := AudioStreamPlayer.new()	
 	add_child(player_base)
 	player_base.stream = stream_base
 	player_base.volume_db = rng.randf_range(volume_range, 0)
 #	player_base.pitch_scale = rng.randf_range(0.99, 1.01) # nope, causes phasing
 	player_base.set_bus(bus)
 	player_base.play()
+	$Timer.start(10)
 	sus_base_playing.append(player_base)
 	release_pitch.append(note_pitch)
 	yield(player_base, "finished")
@@ -56,16 +58,24 @@ func stop_note_sus(performer: String):
 	if sus_base_playing == []:
 		return
 	else:
+		var time_progress: float = 10.0 - $Timer.time_left
+		print("Note length held for seconds: " + str(time_progress))
+		$Timer.stop()
+		var atten: float = 60 * cos(time_progress / 8 + PI / 2) # http://fooplot.com/#W3sidHlwZSI6MCwiZXEiOiI0MCpjb3MoeC84K3BpLzIpIiwiY29sb3IiOiIjMDAwMDAwIn0seyJ0eXBlIjoxMDAwLCJ3aW5kb3ciOlsiLTEyLjQyNjc5MDYyNDk5OTk0NyIsIjI3LjI0NjA2MDkzNzQ5OTg5OCIsIi0yMy4xMjAxNzY1NjI0OTk4OTMiLCIxLjI5Mzg4NTkzNzUwMDAwODIiXX1d
 		var bus: String
+		var player_base = sus_base_playing.pop_front()
 		if performer == "Player": bus = "Release"
 		elif performer == "Computer": bus = "Computer"
-		play_note_rel(release_pitch.pop_front(), bus)
+		play_note_rel(release_pitch.pop_front(), atten, bus)
 		var fade := Tween.new()
-		add_child(fade)		
-		var player_base = sus_base_playing.pop_front()
-#		fade.interpolate_property(player_base, NodePath(str(player_base.get_path()) + ":volume_db"), null, -80.0, 0.382, Tween.TRANS_SINE, Tween.EASE_OUT)
-#		yield(fade, "tween_completed")
-		player_base.stop() # TODO: Change stop to rapid fadeout using tween, and also play releas sample
+		add_child(fade)
+		fade.interpolate_property(player_base, "volume_db", null, -80.0, 0.382, Tween.TRANS_SINE, Tween.EASE_OUT, 0)
+		fade.start()
+#		print(player_base.volume_db)
+#		print("Is Tween active?")
+#		print(fade.is_active())
+		yield(fade, "tween_completed")
+		player_base.stop() # TODO: Change stop to rapid fadeout using tween
 		player_base.queue_free()
 #		if art_ext_last == true:
 #			var player_ext = sus_ext_playing.pop_front()
@@ -80,18 +90,32 @@ func stop_note_sus(performer: String):
 #		$NoteSusBase.notes_array[note_pitch]
 #	play_note_rel(notes_playing.pop_front())
 	
-func play_note_rel(note_pitch: int, bus: String):
+func play_note_rel(note_pitch: int, atten: float, bus: String):
 	var stream: Resource = $NoteRelBase.notes_array[note_pitch]
 #	print_filename(stream)
 	var _player_base := AudioStreamPlayer.new()
 	add_child(_player_base)
 	_player_base.stream = stream
-	_player_base.volume_db = rng.randf_range(volume_range, 0)
+	_player_base.volume_db = rng.randf_range(volume_range, 0) + atten
 	_player_base.set_bus(bus)
 	_player_base.play()
+#	print("Release volume is: " + str(_player_base.volume_db))
 	yield(_player_base, "finished")
 	_player_base.queue_free()
 #	$NoteRelExt.notes_array[note_pitch]
+
+
+func dampen():
+	$AnimationPlayer.stop(false)
+	$AnimationPlayer.play("art_dampen", -1, 1.0, false)
+	yield($AnimationPlayer, "animation_finished")
+	print($MixerBus.compressor_mix)
+
+func undampen():
+	$AnimationPlayer.stop(false)
+	$AnimationPlayer.play("art_dampen", -1, -2.0, true)
+	yield($AnimationPlayer, "animation_finished")
+	print($MixerBus.compressor_mix)
 
 func play_sound_handling(sound: String, bus: String = "Handling"):
 	# Determine which handling sound to play
