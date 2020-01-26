@@ -75,6 +75,7 @@ const LESSONS = [
 	[5, 7, 5],
 	[3, 3, 3],
 	
+	# this actually sounds good
 	[5, 6, 5, 4, 5, 7, 6],
 	[3, 3, 4, 2, 3, 3, 4],
 	
@@ -95,7 +96,11 @@ const LESSONS = [
 	
 	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 	[3, 2, 3, 2, 3, 2, 3, 2, 3, 4],
-
+	
+	# this actually sounds good
+	[5, 10, 5, 10, 12, 12, 5, 10, 5, 10, 3, 3],
+	[2, 2, 2, 2, 3, 3, 2, 2, 2, 2, 3, 3]
+	
 ]
 
 const ACKNOWLEDGE = preload("res://assets/computer/system_acknowledge.wav")
