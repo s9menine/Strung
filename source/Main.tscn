@@ -33,7 +33,7 @@ outline_color = Color( 0.933333, 0.866667, 0.8, 1 )
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 38
+size = 32
 outline_color = Color( 0.933333, 0.866667, 0.8, 1 )
 font_data = ExtResource( 23 )
 
@@ -213,15 +213,15 @@ align = 2
 [node name="Instructions" type="Label" parent="Interface/MarginContainer/VSplitContainer"]
 margin_top = 131.0
 margin_right = 800.0
-margin_bottom = 232.0
+margin_bottom = 216.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.933333, 0.866667, 0.8, 1 )
-text = "
-Press  R  to play target phrase"
+text = "Press R to replay target phrase
+Repeat this phrase to advance"
 align = 2
 
 [node name="HSplitContainer" type="HSplitContainer" parent="Interface/MarginContainer/VSplitContainer"]
-margin_top = 236.0
+margin_top = 220.0
 margin_right = 800.0
 margin_bottom = 494.0
 size_flags_horizontal = 3
@@ -234,20 +234,20 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer"]
 margin_right = 506.0
-margin_bottom = 258.0
+margin_bottom = 274.0
 
 [node name="Padding" type="ColorRect" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer"]
 margin_right = 506.0
-margin_bottom = 125.0
+margin_bottom = 133.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.62
 color = Color( 0.133333, 0.0666667, 0.2, 1 )
 
 [node name="MainKeys" type="GridContainer" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer"]
-margin_top = 129.0
+margin_top = 137.0
 margin_right = 506.0
-margin_bottom = 206.0
+margin_bottom = 219.0
 size_flags_horizontal = 7
 size_flags_vertical = 3
 columns = 4
@@ -257,15 +257,15 @@ __meta__ = {
 
 [node name="CenterContainerA" type="CenterContainer" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer/MainKeys"]
 margin_right = 123.0
-margin_bottom = 77.0
+margin_bottom = 82.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ButtonA" type="TextureButton" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer/MainKeys/CenterContainerA"]
 margin_left = 61.0
-margin_top = 38.0
+margin_top = 41.0
 margin_right = 61.0
-margin_bottom = 38.0
+margin_bottom = 41.0
 mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -280,15 +280,15 @@ stretch_mode = 3
 [node name="CenterContainerS" type="CenterContainer" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer/MainKeys"]
 margin_left = 127.0
 margin_right = 250.0
-margin_bottom = 77.0
+margin_bottom = 82.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ButtonS" type="TextureButton" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer/MainKeys/CenterContainerS"]
 margin_left = 61.0
-margin_top = 38.0
+margin_top = 41.0
 margin_right = 61.0
-margin_bottom = 38.0
+margin_bottom = 41.0
 mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -303,15 +303,15 @@ stretch_mode = 3
 [node name="CenterContainerD" type="CenterContainer" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer/MainKeys"]
 margin_left = 254.0
 margin_right = 377.0
-margin_bottom = 77.0
+margin_bottom = 82.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ButtonD" type="TextureButton" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer/MainKeys/CenterContainerD"]
 margin_left = 61.0
-margin_top = 38.0
+margin_top = 41.0
 margin_right = 61.0
-margin_bottom = 38.0
+margin_bottom = 41.0
 mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -326,15 +326,15 @@ stretch_mode = 3
 [node name="CenterContainerF" type="CenterContainer" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer/MainKeys"]
 margin_left = 381.0
 margin_right = 504.0
-margin_bottom = 77.0
+margin_bottom = 82.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ButtonF" type="TextureButton" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer/MainKeys/CenterContainerF"]
 margin_left = 61.0
-margin_top = 38.0
+margin_top = 41.0
 margin_right = 61.0
-margin_bottom = 38.0
+margin_bottom = 41.0
 mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -347,9 +347,9 @@ expand = true
 stretch_mode = 3
 
 [node name="ButtonSpacebar" type="TextureButton" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer"]
-margin_top = 210.0
+margin_top = 223.0
 margin_right = 506.0
-margin_bottom = 258.0
+margin_bottom = 274.0
 mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -363,11 +363,11 @@ stretch_mode = 3
 [node name="HBoxContainer" type="HBoxContainer" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer"]
 margin_left = 518.0
 margin_right = 800.0
-margin_bottom = 258.0
+margin_bottom = 274.0
 
 [node name="Padding" type="ColorRect" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/HBoxContainer"]
 margin_right = 76.0
-margin_bottom = 258.0
+margin_bottom = 274.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.62
@@ -376,29 +376,29 @@ color = Color( 0.133333, 0.0666667, 0.2, 1 )
 [node name="VBoxContainer2" type="VBoxContainer" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/HBoxContainer"]
 margin_left = 80.0
 margin_right = 282.0
-margin_bottom = 258.0
+margin_bottom = 274.0
 
 [node name="Padding2" type="ColorRect" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/HBoxContainer/VBoxContainer2"]
 margin_right = 202.0
-margin_bottom = 61.0
+margin_bottom = 69.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.62
 color = Color( 0.133333, 0.0666667, 0.2, 1 )
 
 [node name="Padding3" type="ColorRect" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/HBoxContainer/VBoxContainer2"]
-margin_top = 65.0
+margin_top = 73.0
 margin_right = 202.0
-margin_bottom = 126.0
+margin_bottom = 142.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.62
 color = Color( 0.133333, 0.0666667, 0.2, 1 )
 
 [node name="CenterContainerUp" type="CenterContainer" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/HBoxContainer/VBoxContainer2"]
-margin_top = 130.0
+margin_top = 146.0
 margin_right = 202.0
-margin_bottom = 192.0
+margin_bottom = 208.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -415,9 +415,9 @@ texture_normal = ExtResource( 15 )
 texture_pressed = ExtResource( 20 )
 
 [node name="ArticulationKeys" type="HBoxContainer" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/HBoxContainer/VBoxContainer2"]
-margin_top = 196.0
+margin_top = 212.0
 margin_right = 202.0
-margin_bottom = 258.0
+margin_bottom = 274.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
@@ -535,6 +535,7 @@ Handles level/lesson progression.
 Plays assistant voicelines."
 }
 time = 2.4
+current_lesson = -1
 
 [node name="Course" type="Node" parent="Computer"]
 script = ExtResource( 26 )
@@ -547,6 +548,6 @@ bus = "System"
 [connection signal="note_played" from="Player" to="Computer" method="_on_Player_note_played"]
 [connection signal="note_released" from="Player" to="Computer" method="_on_Player_note_released"]
 [connection signal="acknowledged" from="Computer" to="Player" method="_on_Computer_acknowledged"]
-[connection signal="teaching_finished" from="Computer" to="Player" method="_on_Computer_teaching_finished"]
 [connection signal="teaching_finished" from="Computer" to="Computer" method="_on_Computer_teaching_finished"]
+[connection signal="teaching_finished" from="Computer" to="Player" method="_on_Computer_teaching_finished"]
 [connection signal="teaching_started" from="Computer" to="Computer" method="_on_Computer_teaching_started"]

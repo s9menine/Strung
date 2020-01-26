@@ -59,7 +59,7 @@ func stop_note_sus(performer: String):
 		return
 	else:
 		var time_progress: float = 10.0 - $Timer.time_left
-		print("Note length held for seconds: " + str(time_progress))
+#		print("Note length held for seconds: " + str(time_progress))
 		$Timer.stop()
 		var atten: float = 60 * cos(time_progress / 8 + PI / 2) # http://fooplot.com/#W3sidHlwZSI6MCwiZXEiOiI0MCpjb3MoeC84K3BpLzIpIiwiY29sb3IiOiIjMDAwMDAwIn0seyJ0eXBlIjoxMDAwLCJ3aW5kb3ciOlsiLTEyLjQyNjc5MDYyNDk5OTk0NyIsIjI3LjI0NjA2MDkzNzQ5OTg5OCIsIi0yMy4xMjAxNzY1NjI0OTk4OTMiLCIxLjI5Mzg4NTkzNzUwMDAwODIiXX1d
 		var bus: String

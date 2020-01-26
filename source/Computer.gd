@@ -1,7 +1,7 @@
 extends Node
 
 export(float, 0.618, 2.618) var time: float
-var current_lesson := 0
+export(int, -1, 30, 1) var current_lesson := 0
 var pitches_index := 0
 var rhythms_index := 1
 var target_pitches := []
@@ -15,7 +15,7 @@ signal teaching_started
 signal teaching_finished
 
 func _ready() -> void:
-	pass
+	advance()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"): repeat()
@@ -44,7 +44,6 @@ func teach():
 		graduate()
 		return
 	emit_signal("teaching_started")
-	is_computer_busy = true
 	target_pitches = $Course.LESSONS[pitches_index]
 	target_rhythms = $Course.LESSONS[rhythms_index]
 	print("Current teacher sequence is: " + str(target_pitches))
@@ -59,7 +58,6 @@ func teach():
 		yield(get_tree().create_timer(rhythm2secs(1)),"timeout")
 		i += 1
 	emit_signal("teaching_finished")
-	is_computer_busy = false
 
 func _on_Player_note_played(note_pitch):
 	is_player_playing = true
