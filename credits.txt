@@ -14,7 +14,11 @@ Golden ratio musical scale by Sevish
 Story setting inspired by John Ayliff's Seedship
 [https://johnayliff.itch.io/seedship]
 
-​----- Section Divider, ​-----​​
+​-----,​-----​​
+
+Special thanks to Merus and morelle for testing and feedback!
+
+-----,-----
 
 Audio created and processed using the following:
 
@@ -32,11 +36,11 @@ ConvologyXT by Impulse Record
 
 And various sound effect libraries from all over the place, too long to list.
 
-​----- Section Divider, ​-----​​
+​-----,​-----​​
 
 Below are software licenses that I'm supposed to include, nothing interesting, you can close this document now.
 
-​----- Section Divider, ​-----​​
+​-----,​-----​​
 
 Godot Engine
 https://godotengine.org/license
@@ -64,13 +68,13 @@ SOFTWARE.
 
 -- Godot Engine <https://godotengine.org>
 
-​----- Section Divider, ​-----​​
+​-----,​-----​​
 
 Godot Engine logo by Andrea Calabró
 Licensed under CC-BY-3.0
 https://creativecommons.org/licenses/by/3.0/
 
-​----- Section Divider, ​-----​​
+​-----,​-----​​
 
 Godot Mixing Desk
 https://github.com/kyzfrintin/Godot-Mixing-Desk/blob/master/LICENSE
@@ -97,12 +101,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-​----- Section Divider, ​-----​​
+​-----,​-----​​
 
 Portions of this software are copyright © <2019> The FreeType Project (www.freetype.org).
 All rights reserved.
 
-​----- Section Divider, ​-----​​
+​-----,​-----​​
 
 Copyright 2016 The Merriweather Project Authors (https://github.com/EbenSorkin/Merriweather), with Reserved Font Name "Merriweather".
 
@@ -198,6 +202,6 @@ DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
 OTHER DEALINGS IN THE FONT SOFTWARE.
 
-​----- Section Divider, ​-----​​
+​-----,​-----​​
 
 Wow, why did you not close this document, are you a lawyer or something.

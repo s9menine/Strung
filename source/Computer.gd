@@ -19,7 +19,11 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"): repeat()
-	if event.is_action_pressed("skip"): advance()
+	if event.is_action_pressed("skip"): 
+		is_computer_busy == true
+		$AudioStreamPlayer.stream = $Course.ACKNOWLEDGE
+		$AudioStreamPlayer.play()
+		advance()
 
 func advance():
 	player_pitches.clear()
@@ -28,15 +32,17 @@ func advance():
 	pitches_index = current_lesson * 2
 	rhythms_index = current_lesson * 2 + 1
 	yield(get_tree().create_timer(rhythm2secs(5)), "timeout")
-	is_computer_busy = false
-	teach()
+	if is_computer_busy == false:
+		teach()
+	else:
+		 is_computer_busy == false
 
 func teach():
 	if is_computer_busy == true: return
 #	print("Current indicies are: " + str(pitches_index) + ", " + str(rhythms_index))
 	if pitches_index >= $Course.LESSONS.size():
 		graduate()
-		return	
+		return
 	emit_signal("teaching_started")
 	is_computer_busy = true
 	target_pitches = $Course.LESSONS[pitches_index]
@@ -79,7 +85,6 @@ func _on_Player_note_released() -> void:
 		
 func acknowledge():
 	print("Acknowledged!")
-	is_computer_busy = true
 	emit_signal("acknowledged")
 	yield(get_tree().create_timer(rhythm2secs(2)), "timeout")
 	$AudioStreamPlayer.stream = $Course.ACKNOWLEDGE
