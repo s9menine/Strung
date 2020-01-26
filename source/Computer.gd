@@ -18,6 +18,7 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"): repeat()
+	if event.is_action_pressed("skip"): advance()
 
 func advance():
 	player_pitches.clear()
