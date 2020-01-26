@@ -121,16 +121,15 @@ func rhythm2secs(rhythm: int) -> float:
 			secs = time * 0.618 * 0.618 * 0.618
 	return secs
 	
-#TODOs
+# TODOs
 #
-#access Instrument and play notes, with pitch and duration
-#rhythm: use timers between calling play_note_atk/sus and play_note_stop
+# play handling sounds before notes as hints
 #
+# redesign levels
 #
-#play assistant voicelines
+# play assistant voicelines
 #
-#
-#
+
 
 func _on_Computer_teaching_started() -> void:
 	is_computer_busy = true

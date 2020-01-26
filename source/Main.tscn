@@ -151,6 +151,9 @@ tracks/1/keys = {
 
 [node name="Main" type="Node"]
 script = ExtResource( 25 )
+__meta__ = {
+"_editor_description_": "handles quitting game"
+}
 
 [node name="Interface" type="Control" parent="."]
 anchor_left = 0.5
@@ -167,7 +170,9 @@ mouse_filter = 1
 size_flags_horizontal = 0
 size_flags_vertical = 0
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": false,
+"_editor_description_": "all the visual stuff
+add touch function for buttons for?"
 }
 
 [node name="Background" type="ColorRect" parent="Interface"]
@@ -513,6 +518,10 @@ anims/reset = SubResource( 24 )
 
 [node name="Player" type="Node" parent="."]
 script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "handles player input
+plays sound through instrument"
+}
 
 [node name="Instrument" parent="Player" instance=ExtResource( 3 )]
 volume_range = -4.0
@@ -521,9 +530,9 @@ volume_range = -4.0
 script = ExtResource( 24 )
 __meta__ = {
 "_editor_description_": "Lets the computer play Instrument target phrases.
-Instances its own Instrument to
+Instances its own Instrument.
 Handles level/lesson progression.
-Doesn't play handling sounds."
+Plays assistant voicelines."
 }
 time = 2.4
 

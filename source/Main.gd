@@ -8,7 +8,7 @@ func _ready() -> void:
 	os_name = OS.get_name()
 	$Interface/Curtains/AnimationPlayer.play("reset")
 
-func _process(delta: float) -> void:
+func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("exit") and os_name != "HTML5":
 		quit_start()
 	if Input.is_action_just_released("exit") and os_name != "HTML5":

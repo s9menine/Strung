@@ -43,9 +43,9 @@ pan = 0.38
 
 [sub_resource type="AudioEffectDistortion" id=17]
 resource_name = "Distortion"
-mode = 4
+mode = 3
 keep_hf_hz = 8970.0
-drive = 0.4
+drive = 0.6
 post_gain = -10.9
 
 [sub_resource type="AudioEffectCompressor" id=11]
@@ -57,7 +57,7 @@ release_ms = 380.0
 
 [sub_resource type="AudioEffectHighShelfFilter" id=13]
 resource_name = "HighShelfFilter"
-cutoff_hz = 5750.0
+cutoff_hz = 7750.0
 resonance = 0.68
 gain = 0.39
 
