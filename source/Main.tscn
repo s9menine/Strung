@@ -539,3 +539,5 @@ bus = "System"
 [connection signal="note_released" from="Player" to="Computer" method="_on_Player_note_released"]
 [connection signal="acknowledged" from="Computer" to="Player" method="_on_Computer_acknowledged"]
 [connection signal="teaching_finished" from="Computer" to="Player" method="_on_Computer_teaching_finished"]
+[connection signal="teaching_finished" from="Computer" to="Computer" method="_on_Computer_teaching_finished"]
+[connection signal="teaching_started" from="Computer" to="Computer" method="_on_Computer_teaching_started"]

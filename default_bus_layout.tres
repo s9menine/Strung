@@ -1,73 +1,71 @@
-[gd_resource type="AudioBusLayout" load_steps=16 format=2]
-
-[sub_resource type="AudioEffectRecord" id=1]
-resource_name = "Record"
+[gd_resource type="AudioBusLayout" load_steps=15 format=2]
 
 [sub_resource type="AudioEffectCompressor" id=2]
 resource_name = "Compressor"
-threshold = -18.0
-ratio = 1.3
+threshold = -22.8
+ratio = 1.2
 attack_us = 50.0
-release_ms = 120.0
+release_ms = 228.0
 
 [sub_resource type="AudioEffectLimiter" id=3]
 resource_name = "Limiter"
 ceiling_db = -1.1
 threshold_db = -3.0
 
-[sub_resource type="AudioEffectStereoEnhance" id=4]
-resource_name = "StereoEnhance"
+[sub_resource type="AudioEffectRecord" id=16]
+resource_name = "Record"
 
 [sub_resource type="AudioEffectReverb" id=5]
 resource_name = "Reverb"
-predelay_msec = 30.0
-room_size = 0.16
+predelay_msec = 83.0
+predelay_feedback = 0.24
+room_size = 0.36
 damping = 1.0
-spread = 0.35
-hipass = 0.64
-wet = 0.1
-
-[sub_resource type="AudioEffectPanner" id=6]
-resource_name = "Panner"
-pan = -0.38
-
-[sub_resource type="AudioEffectPanner" id=7]
-resource_name = "Panner"
-pan = -0.24
+spread = 0.54
+hipass = 0.24
+wet = 0.04
 
 [sub_resource type="AudioEffectPanner" id=8]
 resource_name = "Panner"
-pan = 0.24
+pan = -0.38
 
 [sub_resource type="AudioEffectPanner" id=9]
 resource_name = "Panner"
+pan = -0.24
+
+[sub_resource type="AudioEffectPanner" id=6]
+resource_name = "Panner"
+pan = 0.24
+
+[sub_resource type="AudioEffectPanner" id=18]
+resource_name = "Panner"
 pan = 0.38
 
-[sub_resource type="AudioEffectDistortion" id=10]
+[sub_resource type="AudioEffectDistortion" id=17]
 resource_name = "Distortion"
-mode = 3
-keep_hf_hz = 8484.0
-drive = 0.75
-post_gain = -10.46
+mode = 4
+keep_hf_hz = 8970.0
+drive = 0.4
+post_gain = -10.9
 
 [sub_resource type="AudioEffectCompressor" id=11]
 resource_name = "Compressor"
-threshold = -14.0
-ratio = 3.6
-gain = 3.5
-release_ms = 358.0
-
-[sub_resource type="AudioEffectLowShelfFilter" id=12]
-resource_name = "LowShelfFilter"
-cutoff_hz = 354.0
-resonance = 0.68
-gain = 0.24
+threshold = -21.0
+ratio = 1.9
+gain = 2.5
+release_ms = 380.0
 
 [sub_resource type="AudioEffectHighShelfFilter" id=13]
 resource_name = "HighShelfFilter"
 cutoff_hz = 5750.0
 resonance = 0.68
 gain = 0.39
+
+[sub_resource type="AudioEffectLowShelfFilter" id=12]
+resource_name = "LowShelfFilter"
+cutoff_hz = 354.0
+resonance = 0.68
+gain = 0.24
 
 [sub_resource type="AudioEffectPitchShift" id=15]
 resource_name = "PitchShift"
@@ -76,53 +74,51 @@ pitch_scale = 1.1
 [sub_resource type="AudioEffectCompressor" id=14]
 resource_name = "Compressor"
 threshold = -16.8
-ratio = 3.3
+ratio = 3.7
 attack_us = 29.0
 release_ms = 171.0
 mix = 0.0
 
 [resource]
-bus/0/effect/0/effect = SubResource( 1 )
+bus/0/effect/0/effect = SubResource( 2 )
 bus/0/effect/0/enabled = true
-bus/0/effect/1/effect = SubResource( 2 )
+bus/0/effect/1/effect = SubResource( 3 )
 bus/0/effect/1/enabled = true
-bus/0/effect/2/effect = SubResource( 3 )
+bus/0/effect/2/effect = SubResource( 16 )
 bus/0/effect/2/enabled = true
 bus/1/name = "Spatialiser"
 bus/1/solo = false
 bus/1/mute = false
 bus/1/bypass_fx = false
-bus/1/volume_db = -0.785987
+bus/1/volume_db = -0.330477
 bus/1/send = "Master"
-bus/1/effect/0/effect = SubResource( 4 )
-bus/1/effect/0/enabled = false
-bus/1/effect/1/effect = SubResource( 5 )
-bus/1/effect/1/enabled = false
+bus/1/effect/0/effect = SubResource( 5 )
+bus/1/effect/0/enabled = true
 bus/2/name = "Ambience"
 bus/2/solo = false
 bus/2/mute = false
 bus/2/bypass_fx = false
-bus/2/volume_db = -6.32371
+bus/2/volume_db = -11.5712
 bus/2/send = "Spatialiser"
 bus/3/name = "Computer"
 bus/3/solo = false
 bus/3/mute = false
 bus/3/bypass_fx = false
-bus/3/volume_db = 0.207247
+bus/3/volume_db = -0.397138
 bus/3/send = "Spatialiser"
-bus/3/effect/0/effect = SubResource( 10 )
+bus/3/effect/0/effect = SubResource( 17 )
 bus/3/effect/0/enabled = true
 bus/3/effect/1/effect = SubResource( 11 )
 bus/3/effect/1/enabled = true
-bus/3/effect/2/effect = SubResource( 12 )
+bus/3/effect/2/effect = SubResource( 13 )
 bus/3/effect/2/enabled = true
-bus/3/effect/3/effect = SubResource( 13 )
+bus/3/effect/3/effect = SubResource( 12 )
 bus/3/effect/3/enabled = true
 bus/4/name = "System"
 bus/4/solo = false
 bus/4/mute = false
 bus/4/bypass_fx = false
-bus/4/volume_db = -9.1624
+bus/4/volume_db = -8.73018
 bus/4/send = "Computer"
 bus/4/effect/0/effect = SubResource( 15 )
 bus/4/effect/0/enabled = true
@@ -130,13 +126,13 @@ bus/5/name = "Voice"
 bus/5/solo = false
 bus/5/mute = false
 bus/5/bypass_fx = false
-bus/5/volume_db = -5.625
+bus/5/volume_db = -5.62162
 bus/5/send = "Computer"
 bus/6/name = "Instrument"
 bus/6/solo = false
 bus/6/mute = false
 bus/6/bypass_fx = false
-bus/6/volume_db = 0.0
+bus/6/volume_db = -0.197157
 bus/6/send = "Spatialiser"
 bus/6/effect/0/effect = SubResource( 14 )
 bus/6/effect/0/enabled = true
@@ -144,55 +140,55 @@ bus/7/name = "Sustain"
 bus/7/solo = false
 bus/7/mute = false
 bus/7/bypass_fx = false
-bus/7/volume_db = -5.71662
+bus/7/volume_db = -5.88194
 bus/7/send = "Instrument"
 bus/8/name = "Release"
 bus/8/solo = false
 bus/8/mute = false
 bus/8/bypass_fx = false
-bus/8/volume_db = -9.30328
+bus/8/volume_db = -8.59515
 bus/8/send = "Instrument"
 bus/9/name = "Attack"
 bus/9/solo = false
 bus/9/mute = false
 bus/9/bypass_fx = false
-bus/9/volume_db = -5.93425
+bus/9/volume_db = -6.32371
 bus/9/send = "Instrument"
 bus/10/name = "Handling"
 bus/10/solo = false
 bus/10/mute = false
 bus/10/bypass_fx = false
-bus/10/volume_db = -20.7447
+bus/10/volume_db = -19.832
 bus/10/send = "Instrument"
 bus/11/name = "Key 1"
 bus/11/solo = false
 bus/11/mute = false
 bus/11/bypass_fx = false
-bus/11/volume_db = -0.190491
+bus/11/volume_db = 0.0
 bus/11/send = "Handling"
-bus/11/effect/0/effect = SubResource( 6 )
+bus/11/effect/0/effect = SubResource( 8 )
 bus/11/effect/0/enabled = true
 bus/12/name = "Key 2"
 bus/12/solo = false
 bus/12/mute = false
 bus/12/bypass_fx = false
-bus/12/volume_db = -0.190491
+bus/12/volume_db = 0.0
 bus/12/send = "Handling"
-bus/12/effect/0/effect = SubResource( 7 )
+bus/12/effect/0/effect = SubResource( 9 )
 bus/12/effect/0/enabled = true
 bus/13/name = "Key 3"
 bus/13/solo = false
 bus/13/mute = false
 bus/13/bypass_fx = false
-bus/13/volume_db = -0.00828743
+bus/13/volume_db = 0.0
 bus/13/send = "Handling"
-bus/13/effect/0/effect = SubResource( 8 )
+bus/13/effect/0/effect = SubResource( 6 )
 bus/13/effect/0/enabled = true
 bus/14/name = "Key 4"
 bus/14/solo = false
 bus/14/mute = false
 bus/14/bypass_fx = false
-bus/14/volume_db = -0.197157
+bus/14/volume_db = 0.0
 bus/14/send = "Handling"
-bus/14/effect/0/effect = SubResource( 9 )
+bus/14/effect/0/effect = SubResource( 18 )
 bus/14/effect/0/enabled = true

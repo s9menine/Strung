@@ -181,4 +181,3 @@ skip={
 [rendering]
 
 environment/default_clear_color=Color( 0.0666667, 0, 0.133333, 1 )
-environment/default_environment="res://source/default_env.tres"

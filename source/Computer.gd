@@ -8,6 +8,7 @@ var target_pitches := []
 var target_rhythms := []
 var player_pitches := []
 var is_player_playing := false
+var is_computer_busy := false
 
 signal acknowledged
 signal teaching_started
@@ -27,14 +28,17 @@ func advance():
 	pitches_index = current_lesson * 2
 	rhythms_index = current_lesson * 2 + 1
 	yield(get_tree().create_timer(rhythm2secs(5)), "timeout")
+	is_computer_busy = false
 	teach()
 
 func teach():
-	emit_signal("teaching_started")
+	if is_computer_busy == true: return
 #	print("Current indicies are: " + str(pitches_index) + ", " + str(rhythms_index))
 	if pitches_index >= $Course.LESSONS.size():
 		graduate()
-		return
+		return	
+	emit_signal("teaching_started")
+	is_computer_busy = true
 	target_pitches = $Course.LESSONS[pitches_index]
 	target_rhythms = $Course.LESSONS[rhythms_index]
 	print("Current teacher sequence is: " + str(target_pitches))
@@ -49,6 +53,7 @@ func teach():
 		yield(get_tree().create_timer(rhythm2secs(1)),"timeout")
 		i += 1
 	emit_signal("teaching_finished")
+	is_computer_busy = false
 
 func _on_Player_note_played(note_pitch):
 	is_player_playing = true
@@ -63,7 +68,7 @@ func _on_Player_note_played(note_pitch):
 		player_pitches.resize(target_pitches.size())
 		player_pitches.invert()
 		print("Current player sequence is: " + str(player_pitches))
-	if player_pitches == target_pitches and player_pitches != []:
+	if player_pitches == target_pitches and player_pitches != [] and is_computer_busy == false:
 		yield(get_parent().get_node("Player"), "note_released")
 		acknowledge()
 		advance()
@@ -74,6 +79,7 @@ func _on_Player_note_released() -> void:
 		
 func acknowledge():
 	print("Acknowledged!")
+	is_computer_busy = true
 	emit_signal("acknowledged")
 	yield(get_tree().create_timer(rhythm2secs(2)), "timeout")
 	$AudioStreamPlayer.stream = $Course.ACKNOWLEDGE
@@ -120,5 +126,11 @@ func rhythm2secs(rhythm: int) -> float:
 #
 #
 #
+
+func _on_Computer_teaching_started() -> void:
+	is_computer_busy = true
+
+func _on_Computer_teaching_finished() -> void:
+	is_computer_busy = false
 
 
