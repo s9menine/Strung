@@ -67,7 +67,8 @@ func _input(event) -> void:
 #	Play notes on hammer
 	if Input.is_action_just_pressed("hammer"):
 		var note_pitch = _get_note_pitch()
-		if note_pitch == 0: 
+		if note_pitch == 0:
+			$Instrument.play_sound_handling("hammer_strike")
 			return
 		else:
 			emit_signal("note_played", note_pitch)
