@@ -8,10 +8,10 @@ enum {
 }
 
 const lines:Dictionary = {
-	0:0, 
-	1:0,
-	2:0,
-	3:0,
+	0: 0, 
+	1: 0,
+	2: 0,
+	3: 0,
 }
 
 onready var player = $AudioStreamPlayer
@@ -19,7 +19,7 @@ onready var player = $AudioStreamPlayer
 signal assistant_said(content)
 
 func _ready() -> void:
-	player.stream = 1
+	player.stream = lines[0]
 	yield(player, "finished")
 	emit_signal("assistant_said", INTRODUCTION)
 

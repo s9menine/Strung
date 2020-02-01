@@ -11,5 +11,5 @@ dest_files=[ "res://.import/note_sus_base_01.ogg-7cbfff592b89f429bd55d37e482a9ed
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

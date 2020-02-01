@@ -50,3 +50,10 @@ func quit():
 #	following code resets game instead of quitting
 #	var reset_scene: PackedScene = load("res://source/Main.tscn")
 #	get_tree().change_scene_to(reset_scene)
+
+#UNUSED CREDITS
+#"Assistant" inspired by Dan Vogt's "Mother" from DATA WING
+#Begin link: [http://www.danvogt.info/] End Link.
+#
+#Story setting inspired by John Ayliff's Seedship
+#Begin link: [https://johnayliff.itch.io/seedship] End Link.
