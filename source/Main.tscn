@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://source/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/visual/Merriweather-Black.ttf" type="DynamicFontData" id=2]
@@ -26,6 +26,216 @@
 [ext_resource path="res://source/Computer.gd" type="Script" id=24]
 [ext_resource path="res://source/Main.gd" type="Script" id=25]
 [ext_resource path="res://source/Course.gd" type="Script" id=26]
+[ext_resource path="res://source/Assistant.tscn" type="PackedScene" id=27]
+[ext_resource path="res://assets/visual/buttons/button_r_pressed.png" type="Texture" id=28]
+[ext_resource path="res://assets/visual/buttons/button_r_default.png" type="Texture" id=29]
+
+[sub_resource type="Animation" id=23]
+resource_name = "fade_in_arts"
+length = 1.62
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/VSplitContainer/HSplitContainer/HBoxContainer/VBoxContainer2/CenterContainerUp:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.62 ),
+"transitions": PoolRealArray( 0.3819, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer/VSplitContainer/HSplitContainer/HBoxContainer/VBoxContainer2/ArticulationKeys:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.62 ),
+"transitions": PoolRealArray( 0.3819, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=24]
+resource_name = "fade_in_key_a"
+length = 1.62
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer/MainKeys/CenterContainerA:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer/MainKeys/CenterContainerA:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.62 ),
+"transitions": PoolRealArray( 0.38, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=25]
+resource_name = "fade_in_key_basics"
+length = 1.62
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer/ButtonSpacebar:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer/ButtonSpacebar:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.62 ),
+"transitions": PoolRealArray( 0.38, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer/MainKeys/CenterContainerD:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer/MainKeys/CenterContainerD:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.62 ),
+"transitions": PoolRealArray( 0.38, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer/MainKeys/CenterContainerF:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer/MainKeys/CenterContainerF:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1.62 ),
+"transitions": PoolRealArray( 0.38, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=26]
+resource_name = "fade_in_key_s"
+length = 1.62
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer/MainKeys/CenterContainerS:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer/MainKeys/CenterContainerS:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.62 ),
+"transitions": PoolRealArray( 0.38, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=27]
+length = 1.62
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath("Curtains:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Curtains:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.62 ),
+"transitions": PoolRealArray( 0.3819, 0.615572 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=28]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Curtains:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="DynamicFont" id=1]
 size = 100
@@ -97,57 +307,11 @@ action = "art_right"
 [sub_resource type="ShortCut" id=22]
 shortcut = SubResource( 21 )
 
-[sub_resource type="Animation" id=23]
-resource_name = "fade_out"
-length = 1.62
-tracks/0/type = "bezier"
-tracks/0/path = NodePath(".:modulate:a")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"points": PoolRealArray( 0, 0, 0, 0, 0.618, 1, -0.618, 0, 0, 0 ),
-"times": PoolRealArray( 0, 1.62 )
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
+[sub_resource type="InputEventAction" id=29]
+action = "interact"
 
-[sub_resource type="Animation" id=24]
-resource_name = "reset"
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/path = NodePath(".:modulate:a")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"points": PoolRealArray( 0, 0, 0, 0, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
+[sub_resource type="ShortCut" id=30]
+shortcut = SubResource( 29 )
 
 [node name="Main" type="Node"]
 script = ExtResource( 25 )
@@ -175,6 +339,15 @@ __meta__ = {
 add touch function for buttons for?"
 }
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Interface"]
+autoplay = "reset"
+anims/fade_in_arts = SubResource( 23 )
+anims/fade_in_key_a = SubResource( 24 )
+anims/fade_in_key_basics = SubResource( 25 )
+anims/fade_in_key_s = SubResource( 26 )
+anims/fade_out = SubResource( 27 )
+anims/reset = SubResource( 28 )
+
 [node name="Background" type="ColorRect" parent="Interface"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -201,6 +374,9 @@ __meta__ = {
 [node name="VSplitContainer" type="VBoxContainer" parent="Interface/MarginContainer"]
 margin_right = 800.0
 margin_bottom = 494.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Title" type="Label" parent="Interface/MarginContainer/VSplitContainer"]
 margin_right = 800.0
@@ -211,6 +387,7 @@ text = "Strung"
 align = 2
 
 [node name="Instructions" type="Label" parent="Interface/MarginContainer/VSplitContainer"]
+visible = false
 margin_top = 131.0
 margin_right = 800.0
 margin_bottom = 216.0
@@ -221,7 +398,7 @@ Repeat this phrase to advance"
 align = 2
 
 [node name="HSplitContainer" type="HSplitContainer" parent="Interface/MarginContainer/VSplitContainer"]
-margin_top = 220.0
+margin_top = 131.0
 margin_right = 800.0
 margin_bottom = 494.0
 size_flags_horizontal = 3
@@ -234,20 +411,20 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer"]
 margin_right = 506.0
-margin_bottom = 274.0
+margin_bottom = 363.0
 
 [node name="Padding" type="ColorRect" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer"]
 margin_right = 506.0
-margin_bottom = 133.0
+margin_bottom = 177.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.62
 color = Color( 0.133333, 0.0666667, 0.2, 1 )
 
 [node name="MainKeys" type="GridContainer" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer"]
-margin_top = 137.0
+margin_top = 181.0
 margin_right = 506.0
-margin_bottom = 219.0
+margin_bottom = 290.0
 size_flags_horizontal = 7
 size_flags_vertical = 3
 columns = 4
@@ -256,16 +433,17 @@ __meta__ = {
 }
 
 [node name="CenterContainerA" type="CenterContainer" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer/MainKeys"]
+modulate = Color( 1, 1, 1, 0 )
 margin_right = 123.0
-margin_bottom = 82.0
+margin_bottom = 109.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ButtonA" type="TextureButton" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer/MainKeys/CenterContainerA"]
 margin_left = 61.0
-margin_top = 41.0
+margin_top = 54.0
 margin_right = 61.0
-margin_bottom = 41.0
+margin_bottom = 54.0
 mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -278,17 +456,18 @@ expand = true
 stretch_mode = 3
 
 [node name="CenterContainerS" type="CenterContainer" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer/MainKeys"]
+modulate = Color( 1, 1, 1, 0 )
 margin_left = 127.0
 margin_right = 250.0
-margin_bottom = 82.0
+margin_bottom = 109.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ButtonS" type="TextureButton" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer/MainKeys/CenterContainerS"]
 margin_left = 61.0
-margin_top = 41.0
+margin_top = 54.0
 margin_right = 61.0
-margin_bottom = 41.0
+margin_bottom = 54.0
 mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -301,17 +480,18 @@ expand = true
 stretch_mode = 3
 
 [node name="CenterContainerD" type="CenterContainer" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer/MainKeys"]
+modulate = Color( 1, 1, 1, 0 )
 margin_left = 254.0
 margin_right = 377.0
-margin_bottom = 82.0
+margin_bottom = 109.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ButtonD" type="TextureButton" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer/MainKeys/CenterContainerD"]
 margin_left = 61.0
-margin_top = 41.0
+margin_top = 54.0
 margin_right = 61.0
-margin_bottom = 41.0
+margin_bottom = 54.0
 mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -324,17 +504,18 @@ expand = true
 stretch_mode = 3
 
 [node name="CenterContainerF" type="CenterContainer" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer/MainKeys"]
+modulate = Color( 1, 1, 1, 0 )
 margin_left = 381.0
 margin_right = 504.0
-margin_bottom = 82.0
+margin_bottom = 109.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ButtonF" type="TextureButton" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer/MainKeys/CenterContainerF"]
 margin_left = 61.0
-margin_top = 41.0
+margin_top = 54.0
 margin_right = 61.0
-margin_bottom = 41.0
+margin_bottom = 54.0
 mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -347,9 +528,10 @@ expand = true
 stretch_mode = 3
 
 [node name="ButtonSpacebar" type="TextureButton" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer"]
-margin_top = 223.0
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 294.0
 margin_right = 506.0
-margin_bottom = 274.0
+margin_bottom = 363.0
 mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -363,49 +545,52 @@ stretch_mode = 3
 [node name="HBoxContainer" type="HBoxContainer" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer"]
 margin_left = 518.0
 margin_right = 800.0
-margin_bottom = 274.0
+margin_bottom = 363.0
 
 [node name="Padding" type="ColorRect" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/HBoxContainer"]
-margin_right = 76.0
-margin_bottom = 274.0
+margin_right = 208.0
+margin_bottom = 363.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.62
 color = Color( 0.133333, 0.0666667, 0.2, 1 )
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/HBoxContainer"]
-margin_left = 80.0
+margin_left = 212.0
 margin_right = 282.0
-margin_bottom = 274.0
+margin_bottom = 363.0
 
 [node name="Padding2" type="ColorRect" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/HBoxContainer/VBoxContainer2"]
-margin_right = 202.0
-margin_bottom = 69.0
+margin_right = 70.0
+margin_bottom = 135.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.62
 color = Color( 0.133333, 0.0666667, 0.2, 1 )
 
 [node name="Padding3" type="ColorRect" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/HBoxContainer/VBoxContainer2"]
-margin_top = 73.0
-margin_right = 202.0
-margin_bottom = 142.0
+margin_top = 139.0
+margin_right = 70.0
+margin_bottom = 274.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.62
 color = Color( 0.133333, 0.0666667, 0.2, 1 )
 
 [node name="CenterContainerUp" type="CenterContainer" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/HBoxContainer/VBoxContainer2"]
-margin_top = 146.0
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 224.0
 margin_right = 202.0
-margin_bottom = 208.0
+margin_bottom = 290.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ButtonUp" type="TextureButton" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/HBoxContainer/VBoxContainer2/CenterContainerUp"]
 margin_left = 70.0
+margin_top = 2.0
 margin_right = 132.0
-margin_bottom = 62.0
+margin_bottom = 64.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 action_mode = 0
@@ -415,30 +600,33 @@ texture_normal = ExtResource( 15 )
 texture_pressed = ExtResource( 20 )
 
 [node name="ArticulationKeys" type="HBoxContainer" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/HBoxContainer/VBoxContainer2"]
-margin_top = 212.0
-margin_right = 202.0
-margin_bottom = 274.0
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 278.0
+margin_right = 70.0
+margin_bottom = 363.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
 [node name="Padding" type="ColorRect" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/HBoxContainer/VBoxContainer2/ArticulationKeys"]
-margin_bottom = 62.0
+margin_bottom = 85.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.62
 color = Color( 0.133333, 0.0666667, 0.2, 1 )
 
 [node name="CenterContainerLeft" type="CenterContainer" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/HBoxContainer/VBoxContainer2/ArticulationKeys"]
+visible = false
 margin_left = 4.0
 margin_right = 66.0
-margin_bottom = 62.0
+margin_bottom = 85.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ButtonLeft" type="TextureButton" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/HBoxContainer/VBoxContainer2/ArticulationKeys/CenterContainerLeft"]
+margin_top = 11.0
 margin_right = 62.0
-margin_bottom = 62.0
+margin_bottom = 73.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 action_mode = 0
@@ -448,15 +636,16 @@ texture_normal = ExtResource( 16 )
 texture_pressed = ExtResource( 17 )
 
 [node name="CenterContainerDown" type="CenterContainer" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/HBoxContainer/VBoxContainer2/ArticulationKeys"]
-margin_left = 70.0
-margin_right = 132.0
-margin_bottom = 62.0
+margin_left = 4.0
+margin_right = 66.0
+margin_bottom = 85.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ButtonDown" type="TextureButton" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/HBoxContainer/VBoxContainer2/ArticulationKeys/CenterContainerDown"]
+margin_top = 11.0
 margin_right = 62.0
-margin_bottom = 62.0
+margin_bottom = 73.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 action_mode = 0
@@ -466,15 +655,17 @@ texture_normal = ExtResource( 18 )
 texture_pressed = ExtResource( 19 )
 
 [node name="CenterContainerRight" type="CenterContainer" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/HBoxContainer/VBoxContainer2/ArticulationKeys"]
-margin_left = 136.0
-margin_right = 198.0
-margin_bottom = 62.0
+visible = false
+margin_left = 70.0
+margin_right = 132.0
+margin_bottom = 85.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ButtonRight" type="TextureButton" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/HBoxContainer/VBoxContainer2/ArticulationKeys/CenterContainerRight"]
+margin_top = 11.0
 margin_right = 62.0
-margin_bottom = 62.0
+margin_bottom = 73.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 action_mode = 0
@@ -484,9 +675,9 @@ texture_normal = ExtResource( 21 )
 texture_pressed = ExtResource( 22 )
 
 [node name="Padding2" type="ColorRect" parent="Interface/MarginContainer/VSplitContainer/HSplitContainer/HBoxContainer/VBoxContainer2/ArticulationKeys"]
-margin_left = 202.0
-margin_right = 202.0
-margin_bottom = 62.0
+margin_left = 70.0
+margin_right = 70.0
+margin_bottom = 85.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.62
@@ -503,7 +694,36 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="CenterContainerR" type="CenterContainer" parent="Interface"]
+margin_left = 698.0
+margin_top = 244.0
+margin_right = 900.0
+margin_bottom = 310.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonR" type="TextureButton" parent="Interface/CenterContainerR"]
+margin_left = 101.0
+margin_top = 33.0
+margin_right = 101.0
+margin_bottom = 33.0
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+action_mode = 0
+shortcut = SubResource( 30 )
+group = SubResource( 5 )
+texture_normal = ExtResource( 29 )
+texture_pressed = ExtResource( 28 )
+expand = true
+stretch_mode = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Curtains" type="ColorRect" parent="Interface"]
+visible = false
 modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -511,10 +731,6 @@ color = Color( 0.0666667, 0, 0.133333, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Interface/Curtains"]
-anims/fade_out = SubResource( 23 )
-anims/reset = SubResource( 24 )
 
 [node name="Player" type="Node" parent="."]
 script = ExtResource( 1 )
@@ -534,14 +750,18 @@ Instances its own Instrument.
 Handles level/lesson progression.
 Plays assistant voicelines."
 }
-time = 2.4
-current_lesson = -1
+time = 0.5
 
-[node name="Course" type="Node" parent="Computer"]
-script = ExtResource( 26 )
+[node name="Assistant" parent="Computer" instance=ExtResource( 27 )]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Computer/Assistant"]
+bus = "Assistant"
 
 [node name="Instrument" parent="Computer" instance=ExtResource( 3 )]
 volume_range = -2.0
+
+[node name="Course" type="Node" parent="Computer"]
+script = ExtResource( 26 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Computer"]
 bus = "System"
@@ -551,3 +771,4 @@ bus = "System"
 [connection signal="teaching_finished" from="Computer" to="Computer" method="_on_Computer_teaching_finished"]
 [connection signal="teaching_finished" from="Computer" to="Player" method="_on_Computer_teaching_finished"]
 [connection signal="teaching_started" from="Computer" to="Computer" method="_on_Computer_teaching_started"]
+[connection signal="assistant_said" from="Computer/Assistant" to="." method="_on_Assistant_assistant_said"]

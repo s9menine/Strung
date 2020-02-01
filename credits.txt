@@ -1,40 +1,58 @@
-﻿Audio game and game audio created by some nine
-[https://s9menine.itch.io/]
+﻿Audio game and game audio created by s9menine (pronounced as "some nine")
+Begin link: [https://s9menine.itch.io/] End Link.
 
-Made with Godot Engine
-[https://godotengine.org/]
+Game made in Godot Engine
+Begin link: [https://godotengine.org/] End Link.
 
 The Instrument inspired by Keven Hobby and William Sethares' Hyperpiano
-[https://www.youtube.com/watch?v=xcSod-sj2CE]
-[https://sethares.engr.wisc.edu/papers/hyperInstruments.html]
+Begin link: [https://www.youtube.com/watch?v=xcSod-sj2CE] End Link.
+Begin link: [https://sethares.engr.wisc.edu/papers/hyperInstruments.html] End Link.
 
 Golden ratio musical scale by Sevish
-[https://sevish.com/2017/golden-ratio-music-interval/]
+Begin link: [https://sevish.com/2017/golden-ratio-music-interval/] End Link.
+
+"Assistant" inspired by Dan Vogt's "Mother" from DATA WING
+Begin link: [http://www.danvogt.info/] End Link.
 
 Story setting inspired by John Ayliff's Seedship
-[https://johnayliff.itch.io/seedship]
+Begin link: [https://johnayliff.itch.io/seedship] End Link.
 
 ​-----,​-----​​
 
-Special thanks to Merus and morelle for testing and feedback!
+Special thanks to the following for testing and feedback! Love y'all [heart emoji]
+
+Begin list:
+
+SPGoding
+Merus
+fizzd
+ItzShaun
+KyleLab
+Hex4Nova
+Klyzx
+Kin (Flour)
+ThatOneGuy
+Miri
+
+End list.
 
 -----,-----
 
-Audio created and processed using the following:
+Audio created and processed using mainly the following:
 
 REAPER by Cockos
-[http://reaper.fm/]
+Begin link: [http://reaper.fm/] End Link.
 
 Serum by Xfer Records
-[https://xferrecords.com/products/serum]
-
-Scale Workshop by Sevish
-[http://sevish.com/scaleworkshop/]
+Begin link: [https://xferrecords.com/products/serum] End Link.
 
 ConvologyXT by Impulse Record
-[https://impulserecord.com/project/convology-xt-plugin/]
+Begin link: [https://impulserecord.com/project/convology-xt-plugin/] End Link.
 
-And various sound effect libraries from all over the place, too long to list.
+Hearling Text-To-Speech
+Begin link: [https://hearling.com/] End Link.
+
+And various sound effect libraries from all over the place.
 
 ​-----,​-----​​
 

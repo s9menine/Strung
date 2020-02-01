@@ -9,7 +9,7 @@
 [ext_resource path="res://source/instrument/Handling.gd" type="Script" id=7]
 [ext_resource path="res://source/instrument/MixerBus.gd" type="Script" id=8]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "art_damp_reset"
 length = 0.001
 tracks/0/type = "value"
@@ -25,8 +25,7 @@ tracks/0/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "art_dampen"
+[sub_resource type="Animation" id=2]
 length = 0.38
 step = 0.01
 tracks/0/type = "value"
@@ -78,5 +77,5 @@ script = ExtResource( 8 )
 wait_time = 10.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/art_damp_reset = SubResource( 2 )
-anims/art_dampen = SubResource( 1 )
+anims/art_damp_reset = SubResource( 1 )
+anims/art_dampen = SubResource( 2 )

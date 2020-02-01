@@ -1,11 +1,12 @@
-[gd_resource type="AudioBusLayout" load_steps=15 format=2]
+[gd_resource type="AudioBusLayout" load_steps=16 format=2]
 
 [sub_resource type="AudioEffectCompressor" id=1]
 resource_name = "Compressor"
 threshold = -22.8
 ratio = 1.2
+gain = 1.3
 attack_us = 50.0
-release_ms = 228.0
+release_ms = 80.0
 
 [sub_resource type="AudioEffectLimiter" id=2]
 resource_name = "Limiter"
@@ -44,16 +45,16 @@ pan = 0.38
 [sub_resource type="AudioEffectDistortion" id=9]
 resource_name = "Distortion"
 mode = 3
-keep_hf_hz = 8970.0
+keep_hf_hz = 8647.0
 drive = 0.6
-post_gain = -10.9
+post_gain = -3.35
 
 [sub_resource type="AudioEffectCompressor" id=10]
 resource_name = "Compressor"
-threshold = -21.0
-ratio = 1.9
-gain = 2.5
-release_ms = 380.0
+threshold = -20.5
+ratio = 1.5
+gain = 4.1
+release_ms = 159.0
 
 [sub_resource type="AudioEffectHighShelfFilter" id=11]
 resource_name = "HighShelfFilter"
@@ -63,9 +64,14 @@ gain = 0.39
 
 [sub_resource type="AudioEffectLowShelfFilter" id=12]
 resource_name = "LowShelfFilter"
-cutoff_hz = 354.0
+cutoff_hz = 367.0
 resonance = 0.68
-gain = 0.24
+gain = 0.14
+db = 1
+
+[sub_resource type="AudioEffectPanner" id=15]
+resource_name = "Panner"
+pan = -0.07
 
 [sub_resource type="AudioEffectPitchShift" id=13]
 resource_name = "PitchShift"
@@ -114,6 +120,8 @@ bus/3/effect/2/effect = SubResource( 11 )
 bus/3/effect/2/enabled = true
 bus/3/effect/3/effect = SubResource( 12 )
 bus/3/effect/3/enabled = true
+bus/3/effect/4/effect = SubResource( 15 )
+bus/3/effect/4/enabled = true
 bus/4/name = "System"
 bus/4/solo = false
 bus/4/mute = false
@@ -122,7 +130,7 @@ bus/4/volume_db = -8.73018
 bus/4/send = "Computer"
 bus/4/effect/0/effect = SubResource( 13 )
 bus/4/effect/0/enabled = true
-bus/5/name = "Voice"
+bus/5/name = "Assistant"
 bus/5/solo = false
 bus/5/mute = false
 bus/5/bypass_fx = false

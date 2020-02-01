@@ -61,7 +61,8 @@ func stop_note_sus(performer: String):
 		var time_progress: float = 10.0 - $Timer.time_left
 #		print("Note length held for seconds: " + str(time_progress))
 		$Timer.stop()
-		var atten: float = 60 * cos(time_progress / 8 + PI / 2) # http://fooplot.com/#W3sidHlwZSI6MCwiZXEiOiI0MCpjb3MoeC84K3BpLzIpIiwiY29sb3IiOiIjMDAwMDAwIn0seyJ0eXBlIjoxMDAwLCJ3aW5kb3ciOlsiLTEyLjQyNjc5MDYyNDk5OTk0NyIsIjI3LjI0NjA2MDkzNzQ5OTg5OCIsIi0yMy4xMjAxNzY1NjI0OTk4OTMiLCIxLjI5Mzg4NTkzNzUwMDAwODIiXX1d
+#		http://fooplot.com/#W3sidHlwZSI6MCwiZXEiOiI0MCpjb3MoeC84K3BpLzIpIiwiY29sb3IiOiIjMDAwMDAwIn0seyJ0eXBlIjoxMDAwLCJ3aW5kb3ciOlsiLTEyLjQyNjc5MDYyNDk5OTk0NyIsIjI3LjI0NjA2MDkzNzQ5OTg5OCIsIi0yMy4xMjAxNzY1NjI0OTk4OTMiLCIxLjI5Mzg4NTkzNzUwMDAwODIiXX1d
+		var atten: float = 60 * cos(time_progress / 8 + PI / 2) 
 		var bus: String
 		var player_base = sus_base_playing.pop_front()
 		if performer == "Player": bus = "Release"
@@ -71,11 +72,8 @@ func stop_note_sus(performer: String):
 		add_child(fade)
 		fade.interpolate_property(player_base, "volume_db", null, -80.0, 0.382, Tween.TRANS_SINE, Tween.EASE_OUT, 0)
 		fade.start()
-#		print(player_base.volume_db)
-#		print("Is Tween active?")
-#		print(fade.is_active())
 		yield(fade, "tween_completed")
-		player_base.stop() # TODO: Change stop to rapid fadeout using tween
+		player_base.stop()
 		player_base.queue_free()
 #		if art_ext_last == true:
 #			var player_ext = sus_ext_playing.pop_front()
@@ -129,8 +127,7 @@ func play_sound_handling(sound: String, bus: String = "Handling"):
 	elif sound == "hammer_release" :
 		stream = $Handling.hammer_release
 	elif sound == "hammer_strike" :
-		stream = $Handling.hammer_strike() # this function alternates between the two strike samples
-	
+		stream = $Handling.hammer_strike()
 	# Create AudioStreamPlayer node, add it to SceneTree, play it, destroy it
 	var _player := AudioStreamPlayer.new()
 	add_child(_player)
@@ -140,7 +137,7 @@ func play_sound_handling(sound: String, bus: String = "Handling"):
 #	bus adds panning for Keys 1-4
 	_player.set_bus(bus) 
 	_player.play()
-	yield(_player, "finished") # "finished" is name of signal emitted by AudioStreamPlayer
+	yield(_player, "finished") # "finished" is signal emitted by AudioStreamPlayer
 	_player.queue_free()
 
 

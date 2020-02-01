@@ -38,6 +38,11 @@ window/stretch/aspect="keep_width"
 
 enabled=PoolStringArray(  )
 
+[gdnative]
+
+singletons=[  ]
+singletons_disabled=[  ]
+
 [importer_defaults]
 
 wav={

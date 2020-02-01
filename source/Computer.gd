@@ -1,6 +1,6 @@
 extends Node
 
-export(float, 0.618, 2.618) var time: float
+export(float, 0.0, 3.0) var time: float
 export(int, -1, 30, 1) var current_lesson := 0
 var pitches_index := 0
 var rhythms_index := 1
@@ -15,16 +15,20 @@ signal teaching_started
 signal teaching_finished
 
 func _ready() -> void:
-	advance()
+	pitches_index = current_lesson * 2
+	rhythms_index = current_lesson * 2 + 1
+#	advance()
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("interact"): repeat()
+	if event.is_action_pressed("interact"):
+		repeat()
 	if event.is_action_pressed("skip"): 
 		is_computer_busy == true
 		$AudioStreamPlayer.stream = $Course.ACKNOWLEDGE
 		$AudioStreamPlayer.play()
 		advance()
 
+# increments current_lesson and indicies
 func advance():
 	player_pitches.clear()
 	current_lesson += 1
@@ -35,8 +39,9 @@ func advance():
 	if is_computer_busy == false:
 		teach()
 	else:
-		 is_computer_busy == false
+		is_computer_busy == false
 
+# fetches note sequences via indicies then plays the notes
 func teach():
 	if is_computer_busy == true: return
 #	print("Current indicies are: " + str(pitches_index) + ", " + str(rhythms_index))
@@ -80,7 +85,7 @@ func _on_Player_note_played(note_pitch):
 func _on_Player_note_released() -> void:
 	is_player_playing = false
 #	yield(get_tree().create_timer(rhythm2secs(2)), "timeout")
-		
+
 func acknowledge():
 	print("Acknowledged!")
 	emit_signal("acknowledged")
@@ -90,7 +95,7 @@ func acknowledge():
 
 func graduate():
 	print("Graduated!")
-	target_pitches = [16] # an impossible note to play
+	target_pitches = [99] # an impossible note to play
 	$AudioStreamPlayer.stream = $Course.GRADUATE
 	$AudioStreamPlayer.play()
 	
@@ -102,21 +107,21 @@ func rhythm2secs(rhythm: int) -> float:
 	var secs: float
 	match rhythm:
 		6:
-			secs = time
+			secs = time * 1.618 * 1.618 * 1.618
 		5:
-			secs = time * 0.618
+			secs = time * 1.618 * 1.618
 		4:
-			secs = time * 0.618 * 0.618
+			secs = time * 1.618
 		3:
-			secs = time * 0.618 * 0.618 * 0.618
+			secs = time
 		2:
-			secs = time * 0.618 * 0.618 * 0.618 * 0.618
+			secs = time * 0.618
 		1:
-			secs = time * 0.618 * 0.618 * 0.618 * 0.618 * 0.618
+			secs = time * 0.618 * 0.618
 		0:
-			secs = time * 0.618 * 0.618 * 0.618 * 0.618 * 0.618 * 0.618
-		_: # fallback, same value as "3"
 			secs = time * 0.618 * 0.618 * 0.618
+		_: # fallback, same value as "3"
+			secs = time
 	return secs
 	
 # TODOs
@@ -128,11 +133,8 @@ func rhythm2secs(rhythm: int) -> float:
 # play assistant voicelines
 #
 
-
 func _on_Computer_teaching_started() -> void:
 	is_computer_busy = true
 
 func _on_Computer_teaching_finished() -> void:
 	is_computer_busy = false
-
-
