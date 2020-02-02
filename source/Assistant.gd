@@ -1,28 +1,56 @@
 extends Node
 
-enum {
-	INTRODUCTION
-	KEY_A
-	KEY_S
-	ARTS
-}
-
 const lines:Dictionary = {
-	0: 0, 
-	1: 0,
-	2: 0,
-	3: 0,
+	0: preload("res://assets/computer/vo_assistant_01.ogg"), 
+	1: preload("res://assets/computer/vo_assistant_02.ogg"), 
+	2: preload("res://assets/computer/vo_assistant_03.ogg"), 
+	3: preload("res://assets/computer/vo_assistant_04.ogg"), 
+	4: preload("res://assets/computer/vo_assistant_05.ogg"), 
 }
 
+var is_reply_pending := false
 onready var player = $AudioStreamPlayer
 
 signal assistant_said(content)
 
 func _ready() -> void:
+	emit_signal("assistant_said", "introduction")
 	player.stream = lines[0]
+	player.play()
 	yield(player, "finished")
-	emit_signal("assistant_said", INTRODUCTION)
+	yield(get_tree().create_timer(0.2), "timeout")
+	player.stream = lines[1]
+	player.play()
+	yield(player, "finished")
+#	is_reply_pending = true
+#	_waiting()
+#
+#func _waiting() -> void:
+#	while is_reply_pending == true:
+#		yield(get_tree().create_timer(10.0), "timeout")
+#		if is_reply_pending == false: break
+#		player.stream = lines[2]
+#		player.play()
+#		yield(player, "finished")
+#		yield(get_tree().create_timer(0.2), "timeout")
+#		player.stream = lines[1]
+#		player.play()
+#		yield(player, "finished")
+	
+func reply():
+	is_reply_pending = false
+	player.stop()
+	_accept()
 
+func _accept():
+	emit_signal("assistant_said", "accept_response")
+	player.stream = lines[3]
+	player.play()
+	yield(player, "finished")
+	yield(get_tree().create_timer(0.2), "timeout")
+	player.stream = lines[4]
+	player.play()
+	emit_signal("assistant_said", "controls")
 
 ################## SCRIPT
 #I sense neural network activity.

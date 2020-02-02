@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/system_deny.wav-7f10c71d81bdb2f93e0d45c0f632dbe6.sample"
+
+[deps]
+
+source_file="res://assets/computer/system_deny.wav"
+dest_files=[ "res://.import/system_deny.wav-7f10c71d81bdb2f93e0d45c0f632dbe6.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

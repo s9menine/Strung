@@ -9,6 +9,7 @@ var target_rhythms := []
 var player_pitches := []
 var is_player_playing := false
 var is_computer_busy := false
+var is_reply_pending := false
 
 signal acknowledged
 signal teaching_started
@@ -21,7 +22,10 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"):
-		repeat()
+		if is_reply_pending:
+			$Assistant.reply()
+		else:
+			repeat()
 	if event.is_action_pressed("skip"): 
 		is_computer_busy == true
 		$AudioStreamPlayer.stream = $Course.ACKNOWLEDGE
@@ -49,6 +53,7 @@ func teach():
 		graduate()
 		return
 	emit_signal("teaching_started")
+	is_computer_busy = true
 	target_pitches = $Course.LESSONS[pitches_index]
 	target_rhythms = $Course.LESSONS[rhythms_index]
 	print("Current teacher sequence is: " + str(target_pitches))
@@ -63,6 +68,11 @@ func teach():
 		yield(get_tree().create_timer(rhythm2secs(1)),"timeout")
 		i += 1
 	emit_signal("teaching_finished")
+	is_computer_busy = false
+
+func repeat():
+	player_pitches.clear()
+	teach()
 
 func _on_Player_note_played(note_pitch):
 	is_player_playing = true
@@ -80,7 +90,6 @@ func _on_Player_note_played(note_pitch):
 	if player_pitches == target_pitches and player_pitches != [] and is_computer_busy == false:
 		yield(get_parent().get_node("Player"), "note_released")
 		acknowledge()
-		advance()
 
 func _on_Player_note_released() -> void:
 	is_player_playing = false
@@ -92,16 +101,15 @@ func acknowledge():
 	yield(get_tree().create_timer(rhythm2secs(2)), "timeout")
 	$AudioStreamPlayer.stream = $Course.ACKNOWLEDGE
 	$AudioStreamPlayer.play()
+	yield($AudioStreamPlayer, "finished")
+	advance()
 
 func graduate():
 	print("Graduated!")
 	target_pitches = [99] # an impossible note to play
-	$AudioStreamPlayer.stream = $Course.GRADUATE
+	$AudioStreamPlayer.stream = $Course.CHIRP
 	$AudioStreamPlayer.play()
 	
-func repeat():
-	player_pitches.clear()
-	teach()
 	
 func rhythm2secs(rhythm: int) -> float:
 	var secs: float
@@ -123,18 +131,17 @@ func rhythm2secs(rhythm: int) -> float:
 		_: # fallback, same value as "3"
 			secs = time
 	return secs
-	
-# TODOs
-#
-# play handling sounds before notes as hints
-#
-# redesign levels
-#
-# play assistant voicelines
-#
 
-func _on_Computer_teaching_started() -> void:
+func _on_Assistant_assistant_said(content) -> void:
 	is_computer_busy = true
-
-func _on_Computer_teaching_finished() -> void:
-	is_computer_busy = false
+	match content:
+		"introduction":
+			is_reply_pending = true
+			yield($Assistant/AudioStreamPlayer, "finished")
+			is_computer_busy = false
+		"accept_response":
+			is_reply_pending = false
+		"controls":
+			is_reply_pending = false
+			yield($Assistant/AudioStreamPlayer, "finished")
+			is_computer_busy = false

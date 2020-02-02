@@ -12,8 +12,8 @@ dest_files=[ "res://.import/system_acknowledge.wav-ef05eec142642ceee6d52ddde144a
 [params]
 
 force/8_bit=false
-force/mono=true
-force/max_rate=true
+force/mono=false
+force/max_rate=false
 force/max_rate_hz=48000.0
 edit/trim=true
 edit/normalize=false

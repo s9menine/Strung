@@ -13,16 +13,17 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_released("exit") and os_name != "HTML5":
 		quit_interrupt()
 
-func _on_Assistant_assistant_said(content: int) -> void:
+func _on_Assistant_assistant_said(content) -> void:
 	match content:
-		0:
+		"controls":
 			$Interface/AnimationPlayer.play("fade_in_key_basics")
-			$Computer.teach()
-		1:
+			yield($Interface/AnimationPlayer, "animation_finished")
 			$Interface/AnimationPlayer.play("fade_in_key_a")
-		2:
+			yield($Interface/AnimationPlayer, "animation_finished")
 			$Interface/AnimationPlayer.play("fade_in_key_s")
-		3:
+			yield($Interface/AnimationPlayer, "animation_finished")
+			$Computer.teach()
+		"arts":
 			$Interface/AnimationPlayer.play("fade_in_arts")
 
 func quit_start():

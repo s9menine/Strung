@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://source/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/visual/Merriweather-Black.ttf" type="DynamicFontData" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://source/Assistant.tscn" type="PackedScene" id=27]
 [ext_resource path="res://assets/visual/buttons/button_r_pressed.png" type="Texture" id=28]
 [ext_resource path="res://assets/visual/buttons/button_r_default.png" type="Texture" id=29]
+[ext_resource path="res://assets/ambience/ambience.ogg" type="AudioStream" id=30]
 
 [sub_resource type="Animation" id=23]
 resource_name = "fade_in_arts"
@@ -765,10 +766,16 @@ script = ExtResource( 26 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Computer"]
 bus = "System"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 30 )
+autoplay = true
+bus = "Ambience"
 [connection signal="note_played" from="Player" to="Computer" method="_on_Player_note_played"]
 [connection signal="note_released" from="Player" to="Computer" method="_on_Player_note_released"]
 [connection signal="acknowledged" from="Computer" to="Player" method="_on_Computer_acknowledged"]
 [connection signal="teaching_finished" from="Computer" to="Computer" method="_on_Computer_teaching_finished"]
 [connection signal="teaching_finished" from="Computer" to="Player" method="_on_Computer_teaching_finished"]
 [connection signal="teaching_started" from="Computer" to="Computer" method="_on_Computer_teaching_started"]
+[connection signal="assistant_said" from="Computer/Assistant" to="Computer" method="_on_Assistant_assistant_said"]
 [connection signal="assistant_said" from="Computer/Assistant" to="." method="_on_Assistant_assistant_said"]

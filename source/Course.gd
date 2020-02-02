@@ -105,4 +105,5 @@ const LESSONS = [
 ]
 
 const ACKNOWLEDGE = preload("res://assets/computer/system_acknowledge.wav")
-const GRADUATE = preload("res://assets/computer/system_acknowledge.wav")
+const CHIRP = preload("res://assets/computer/system_chirp.wav")
+const DENY = preload("res://assets/computer/system_deny.wav")
