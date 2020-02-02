@@ -73,6 +73,7 @@ func stop_note_sus(performer: String):
 		fade.interpolate_property(player_base, "volume_db", null, -80.0, 0.382, Tween.TRANS_SINE, Tween.EASE_OUT, 0)
 		fade.start()
 		yield(fade, "tween_completed")
+		fade.queue_free()
 		player_base.stop()
 		player_base.queue_free()
 #		if art_ext_last == true:

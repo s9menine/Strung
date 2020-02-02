@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=63 format=2]
 
 [ext_resource path="res://source/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/visual/Merriweather-Black.ttf" type="DynamicFontData" id=2]
@@ -30,6 +30,7 @@
 [ext_resource path="res://assets/visual/buttons/button_r_pressed.png" type="Texture" id=28]
 [ext_resource path="res://assets/visual/buttons/button_r_default.png" type="Texture" id=29]
 [ext_resource path="res://assets/ambience/ambience.ogg" type="AudioStream" id=30]
+[ext_resource path="res://source/AudioMixer.gd" type="Script" id=31]
 
 [sub_resource type="Animation" id=23]
 resource_name = "fade_in_arts"
@@ -166,6 +167,35 @@ tracks/5/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
+[sub_resource type="Animation" id=31]
+resource_name = "fade_in_key_interact"
+length = 1.62
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath("CenterContainerR:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CenterContainerR:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.62 ),
+"transitions": PoolRealArray( 0.38, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
 [sub_resource type="Animation" id=26]
 resource_name = "fade_in_key_s"
 length = 1.62
@@ -222,6 +252,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("../AudioMixer:master_volume")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.62 ),
+"transitions": PoolRealArray( 3.03143, 1 ),
+"update": 0,
+"values": [ 0.0, -80.0 ]
+}
 
 [sub_resource type="Animation" id=28]
 length = 0.001
@@ -236,6 +278,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../AudioMixer:master_volume")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
 }
 
 [sub_resource type="DynamicFont" id=1]
@@ -345,6 +399,7 @@ autoplay = "reset"
 anims/fade_in_arts = SubResource( 23 )
 anims/fade_in_key_a = SubResource( 24 )
 anims/fade_in_key_basics = SubResource( 25 )
+anims/fade_in_key_interact = SubResource( 31 )
 anims/fade_in_key_s = SubResource( 26 )
 anims/fade_out = SubResource( 27 )
 anims/reset = SubResource( 28 )
@@ -696,6 +751,7 @@ __meta__ = {
 }
 
 [node name="CenterContainerR" type="CenterContainer" parent="Interface"]
+modulate = Color( 1, 1, 1, 0 )
 margin_left = 698.0
 margin_top = 244.0
 margin_right = 900.0
@@ -724,8 +780,6 @@ __meta__ = {
 }
 
 [node name="Curtains" type="ColorRect" parent="Interface"]
-visible = false
-modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.0666667, 0, 0.133333, 1 )
@@ -771,11 +825,13 @@ bus = "System"
 stream = ExtResource( 30 )
 autoplay = true
 bus = "Ambience"
+
+[node name="AudioMixer" type="Node" parent="."]
+script = ExtResource( 31 )
+master_volume = -80.0
 [connection signal="note_played" from="Player" to="Computer" method="_on_Player_note_played"]
 [connection signal="note_released" from="Player" to="Computer" method="_on_Player_note_released"]
 [connection signal="acknowledged" from="Computer" to="Player" method="_on_Computer_acknowledged"]
-[connection signal="teaching_finished" from="Computer" to="Computer" method="_on_Computer_teaching_finished"]
 [connection signal="teaching_finished" from="Computer" to="Player" method="_on_Computer_teaching_finished"]
-[connection signal="teaching_started" from="Computer" to="Computer" method="_on_Computer_teaching_started"]
-[connection signal="assistant_said" from="Computer/Assistant" to="Computer" method="_on_Assistant_assistant_said"]
 [connection signal="assistant_said" from="Computer/Assistant" to="." method="_on_Assistant_assistant_said"]
+[connection signal="assistant_said" from="Computer/Assistant" to="Computer" method="_on_Assistant_assistant_said"]

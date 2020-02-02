@@ -8,37 +8,44 @@ const lines:Dictionary = {
 	4: preload("res://assets/computer/vo_assistant_05.ogg"), 
 }
 
-var is_reply_pending := false
+var is_reply_pending := true
+var has_emitted_request := false
 onready var player = $AudioStreamPlayer
 
 signal assistant_said(content)
 
 func _ready() -> void:
 	emit_signal("assistant_said", "introduction")
+	yield(get_tree().create_timer(1.0), "timeout")
 	player.stream = lines[0]
 	player.play()
 	yield(player, "finished")
 	yield(get_tree().create_timer(0.2), "timeout")
-	player.stream = lines[1]
-	player.play()
-	yield(player, "finished")
-#	is_reply_pending = true
-#	_waiting()
-#
-#func _waiting() -> void:
-#	while is_reply_pending == true:
-#		yield(get_tree().create_timer(10.0), "timeout")
-#		if is_reply_pending == false: break
-#		player.stream = lines[2]
-#		player.play()
-#		yield(player, "finished")
-#		yield(get_tree().create_timer(0.2), "timeout")
-#		player.stream = lines[1]
-#		player.play()
-#		yield(player, "finished")
+	if is_reply_pending: # in case player skips
+		player.stream = lines[1]
+		player.play()
+		emit_signal("assistant_said", "request_response")
+		has_emitted_request = true
+		yield(player, "finished")
+		_waiting()
+
+func _waiting() -> void:
+	while is_reply_pending:
+		if is_reply_pending == false: return
+		yield(get_tree().create_timer(10.0), "timeout")
+		if is_reply_pending == false: return
+		player.stream = lines[2]
+		player.play()
+		yield(player, "finished")
+		if is_reply_pending == false: return
+		yield(get_tree().create_timer(0.2), "timeout")
+		player.stream = lines[1]
+		player.play()
+		yield(player, "finished")
 	
 func reply():
 	is_reply_pending = false
+	print(is_reply_pending)
 	player.stop()
 	_accept()
 
@@ -47,10 +54,20 @@ func _accept():
 	player.stream = lines[3]
 	player.play()
 	yield(player, "finished")
+	emit_signal("assistant_said", "teaching")
+	
+func controls():
+	if not has_emitted_request:
+		emit_signal("assistant_said", "request_response")
+	emit_signal("assistant_said", "controls")
 	yield(get_tree().create_timer(0.2), "timeout")
 	player.stream = lines[4]
 	player.play()
-	emit_signal("assistant_said", "controls")
+
+func skip():
+	is_reply_pending = false
+	player.stop()
+	queue_free()
 
 ################## SCRIPT
 #I sense neural network activity.

@@ -1,10 +1,10 @@
-[gd_resource type="AudioBusLayout" load_steps=16 format=2]
+[gd_resource type="AudioBusLayout" load_steps=17 format=2]
 
 [sub_resource type="AudioEffectCompressor" id=1]
 resource_name = "Compressor"
 threshold = -22.8
-ratio = 1.2
-gain = 1.3
+ratio = 1.1
+gain = 1.0
 attack_us = 50.0
 release_ms = 80.0
 
@@ -24,7 +24,7 @@ room_size = 0.36
 damping = 1.0
 spread = 0.54
 hipass = 0.24
-wet = 0.04
+wet = 0.05
 
 [sub_resource type="AudioEffectPanner" id=5]
 resource_name = "Panner"
@@ -42,42 +42,50 @@ pan = 0.24
 resource_name = "Panner"
 pan = 0.38
 
-[sub_resource type="AudioEffectDistortion" id=9]
+[sub_resource type="AudioEffectReverb" id=9]
+resource_name = "Reverb"
+predelay_msec = 105.0
+predelay_feedback = 0.09
+room_size = 1.0
+damping = 0.81
+hipass = 0.38
+wet = 0.19
+
+[sub_resource type="AudioEffectDistortion" id=10]
 resource_name = "Distortion"
 mode = 3
 keep_hf_hz = 8647.0
-drive = 0.6
-post_gain = -3.35
+drive = 0.35
+post_gain = -6.7
 
-[sub_resource type="AudioEffectCompressor" id=10]
+[sub_resource type="AudioEffectCompressor" id=11]
 resource_name = "Compressor"
-threshold = -20.5
-ratio = 1.5
-gain = 4.1
+threshold = -12.3
+ratio = 1.3
 release_ms = 159.0
 
-[sub_resource type="AudioEffectHighShelfFilter" id=11]
+[sub_resource type="AudioEffectHighShelfFilter" id=12]
 resource_name = "HighShelfFilter"
-cutoff_hz = 7750.0
-resonance = 0.68
+cutoff_hz = 7168.0
+resonance = 0.33
 gain = 0.39
 
-[sub_resource type="AudioEffectLowShelfFilter" id=12]
+[sub_resource type="AudioEffectLowShelfFilter" id=13]
 resource_name = "LowShelfFilter"
 cutoff_hz = 231.0
-resonance = 0.68
-gain = 0.14
+resonance = 0.62
+gain = 0.27
 db = 1
 
-[sub_resource type="AudioEffectPanner" id=15]
+[sub_resource type="AudioEffectPanner" id=14]
 resource_name = "Panner"
 pan = -0.07
 
-[sub_resource type="AudioEffectPitchShift" id=13]
+[sub_resource type="AudioEffectPitchShift" id=15]
 resource_name = "PitchShift"
 pitch_scale = 1.1
 
-[sub_resource type="AudioEffectCompressor" id=14]
+[sub_resource type="AudioEffectCompressor" id=16]
 resource_name = "Compressor"
 threshold = -16.8
 ratio = 3.7
@@ -86,6 +94,7 @@ release_ms = 171.0
 mix = 0.0
 
 [resource]
+bus/0/volume_db = -0.130497
 bus/0/effect/0/effect = SubResource( 1 )
 bus/0/effect/0/enabled = true
 bus/0/effect/1/effect = SubResource( 2 )
@@ -104,37 +113,39 @@ bus/2/name = "Ambience"
 bus/2/solo = false
 bus/2/mute = false
 bus/2/bypass_fx = false
-bus/2/volume_db = -11.5712
+bus/2/volume_db = -11.4787
 bus/2/send = "Spatialiser"
+bus/2/effect/0/effect = SubResource( 9 )
+bus/2/effect/0/enabled = true
 bus/3/name = "Computer"
 bus/3/solo = false
 bus/3/mute = false
 bus/3/bypass_fx = false
-bus/3/volume_db = -0.397138
+bus/3/volume_db = -0.212711
 bus/3/send = "Spatialiser"
-bus/3/effect/0/effect = SubResource( 9 )
+bus/3/effect/0/effect = SubResource( 10 )
 bus/3/effect/0/enabled = true
-bus/3/effect/1/effect = SubResource( 10 )
+bus/3/effect/1/effect = SubResource( 11 )
 bus/3/effect/1/enabled = true
-bus/3/effect/2/effect = SubResource( 11 )
+bus/3/effect/2/effect = SubResource( 12 )
 bus/3/effect/2/enabled = true
-bus/3/effect/3/effect = SubResource( 12 )
+bus/3/effect/3/effect = SubResource( 13 )
 bus/3/effect/3/enabled = true
-bus/3/effect/4/effect = SubResource( 15 )
+bus/3/effect/4/effect = SubResource( 14 )
 bus/3/effect/4/enabled = true
 bus/4/name = "System"
 bus/4/solo = false
 bus/4/mute = false
 bus/4/bypass_fx = false
-bus/4/volume_db = -11.9464
+bus/4/volume_db = -11.9743
 bus/4/send = "Computer"
-bus/4/effect/0/effect = SubResource( 13 )
+bus/4/effect/0/effect = SubResource( 15 )
 bus/4/effect/0/enabled = true
 bus/5/name = "Assistant"
 bus/5/solo = false
 bus/5/mute = false
 bus/5/bypass_fx = false
-bus/5/volume_db = -0.212711
+bus/5/volume_db = -5.62162
 bus/5/send = "Computer"
 bus/6/name = "Instrument"
 bus/6/solo = false
@@ -142,7 +153,7 @@ bus/6/mute = false
 bus/6/bypass_fx = false
 bus/6/volume_db = -0.197157
 bus/6/send = "Spatialiser"
-bus/6/effect/0/effect = SubResource( 14 )
+bus/6/effect/0/effect = SubResource( 16 )
 bus/6/effect/0/enabled = true
 bus/7/name = "Sustain"
 bus/7/solo = false

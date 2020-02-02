@@ -1,9 +1,9 @@
 extends Node
 
 export(float, 0.0, 3.0) var time: float
-export(int, -1, 30, 1) var current_lesson := 0
-var pitches_index := 0
-var rhythms_index := 1
+export(int, 0, 100, 1) var current_lesson := 0
+#var pitches_index := 0
+#var rhythms_index := 1
 var target_pitches := []
 var target_rhythms := []
 var player_pitches := []
@@ -12,50 +12,60 @@ var is_computer_busy := false
 var is_reply_pending := false
 
 signal acknowledged
-signal teaching_started
 signal teaching_finished
 
 func _ready() -> void:
-	pitches_index = current_lesson * 2
-	rhythms_index = current_lesson * 2 + 1
+	$AudioStreamPlayer.stream = $Course.ACKNOWLEDGE
+	$AudioStreamPlayer.play()
+	yield($AudioStreamPlayer, "finished")
 #	advance()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"):
 		if is_reply_pending:
 			$Assistant.reply()
+			$Assistant.is_reply_pending = false
+			$AudioStreamPlayer.stream = $Course.ACKNOWLEDGE
+			$AudioStreamPlayer.play()
 		else:
+			$AudioStreamPlayer.stream = $Course.DENY
+			$AudioStreamPlayer.play()
+			yield($AudioStreamPlayer, "finished")
 			repeat()
 	if event.is_action_pressed("skip"): 
-		is_computer_busy == true
-		$AudioStreamPlayer.stream = $Course.ACKNOWLEDGE
-		$AudioStreamPlayer.play()
-		advance()
+#		is_computer_busy == true
+		var has_skipped := false
+		if has_skipped:
+			$Assistant.skip()
+			has_skipped = true
+			is_computer_busy == false
+		else:
+			$AudioStreamPlayer.stream = $Course.ACKNOWLEDGE
+			$AudioStreamPlayer.play()
+			advance()
 
-# increments current_lesson and indicies
+# increments current_lesson
 func advance():
 	player_pitches.clear()
 	current_lesson += 1
 	print("Now moving to lesson: " + str(current_lesson))
-	pitches_index = current_lesson * 2
-	rhythms_index = current_lesson * 2 + 1
 	yield(get_tree().create_timer(rhythm2secs(5)), "timeout")
 	if is_computer_busy == false:
 		teach()
 	else:
 		is_computer_busy == false
 
-# fetches note sequences via indicies then plays the notes
+# fetches note sequences via lesson number then plays the notes
 func teach():
-	if is_computer_busy == true: return
-#	print("Current indicies are: " + str(pitches_index) + ", " + str(rhythms_index))
-	if pitches_index >= $Course.LESSONS.size():
+	if is_computer_busy == true:
+		return
+	if current_lesson * 2 >= $Course.LESSONS.size():
 		graduate()
 		return
-	emit_signal("teaching_started")
 	is_computer_busy = true
-	target_pitches = $Course.LESSONS[pitches_index]
-	target_rhythms = $Course.LESSONS[rhythms_index]
+	target_pitches = $Course.LESSONS[current_lesson * 2]
+	target_rhythms = $Course.LESSONS[current_lesson * 2 + 1]
+
 	print("Current teacher sequence is: " + str(target_pitches))
 	var i := 0
 	while i <= target_pitches.size() - 1:
@@ -67,8 +77,8 @@ func teach():
 		$Instrument.stop_note_sus("Computer")
 		yield(get_tree().create_timer(rhythm2secs(1)),"timeout")
 		i += 1
-	emit_signal("teaching_finished")
 	is_computer_busy = false
+	emit_signal("teaching_finished")
 
 func repeat():
 	player_pitches.clear()
@@ -141,7 +151,14 @@ func _on_Assistant_assistant_said(content) -> void:
 			is_computer_busy = false
 		"accept_response":
 			is_reply_pending = false
+			yield($Assistant/AudioStreamPlayer, "finished")
+			is_computer_busy = false
+		"teaching":
+#			this signal is emitted after a yield(AudioStreamPlayer, finished)
+			is_computer_busy = false
+			teach()
+			yield(self, "teaching_finished")
+			$Assistant.controls()
 		"controls":
-			is_reply_pending = false
 			yield($Assistant/AudioStreamPlayer, "finished")
 			is_computer_busy = false

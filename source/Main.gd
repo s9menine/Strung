@@ -5,6 +5,7 @@ var is_quitting: bool = false
 var os_name: String = ""
 
 func _ready() -> void:
+	AudioServer.set_bus_layout(preload("res://assets/bus_layout.tres"))
 	os_name = OS.get_name()
 
 func _input(event: InputEvent) -> void:
@@ -15,14 +16,15 @@ func _input(event: InputEvent) -> void:
 
 func _on_Assistant_assistant_said(content) -> void:
 	match content:
+		"request_response":
+			$Interface/AnimationPlayer.play("fade_in_key_interact")
 		"controls":
-			$Interface/AnimationPlayer.play("fade_in_key_basics")
-			yield($Interface/AnimationPlayer, "animation_finished")
 			$Interface/AnimationPlayer.play("fade_in_key_a")
 			yield($Interface/AnimationPlayer, "animation_finished")
 			$Interface/AnimationPlayer.play("fade_in_key_s")
 			yield($Interface/AnimationPlayer, "animation_finished")
-			$Computer.teach()
+			$Interface/AnimationPlayer.play("fade_in_key_basics")
+			yield($Interface/AnimationPlayer, "animation_finished")
 		"arts":
 			$Interface/AnimationPlayer.play("fade_in_arts")
 

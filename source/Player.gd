@@ -1,10 +1,10 @@
 extends Node
 
 
-var art_ext: bool = false
+#var art_ext: bool = false
 var art_damp: bool = false
-var art_stac: bool = false
-var art_trem: bool = false
+#var art_stac: bool = false
+#var art_trem: bool = false
 
 var is_sustaining: bool = false
 
@@ -42,10 +42,10 @@ func _input(event) -> void:
 		$Instrument.play_sound_handling("hammer_release")
 	
 #	Detect articulation keys
-	if Input.is_action_just_pressed("art_up"):
-		art_ext = true
-	if Input.is_action_just_released("art_up"):
-		art_ext = false
+#	if Input.is_action_just_pressed("art_up"):
+#		art_ext = true
+#	if Input.is_action_just_released("art_up"):
+#		art_ext = false
 		
 	if Input.is_action_just_pressed("art_down"):
 		$Instrument.dampen()
@@ -53,16 +53,16 @@ func _input(event) -> void:
 	if Input.is_action_just_released("art_down"):
 		$Instrument.undampen()
 		art_damp = false
-		
-	if Input.is_action_just_pressed("art_left"):
-		art_stac = true
-	if Input.is_action_just_released("art_left"):
-		art_stac = false
-		
-	if Input.is_action_just_pressed("art_right"):
-		art_trem = true
-	if Input.is_action_just_released("art_right"):
-		art_trem = false
+
+#	if Input.is_action_just_pressed("art_left"):
+#		art_stac = true
+#	if Input.is_action_just_released("art_left"):
+#		art_stac = false
+#
+#	if Input.is_action_just_pressed("art_right"):
+#		art_trem = true
+#	if Input.is_action_just_released("art_right"):
+#		art_trem = false
 
 #	Play notes on hammer
 	if Input.is_action_just_pressed("hammer"):
