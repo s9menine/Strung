@@ -32,19 +32,19 @@ func quit_start():
 	is_quitting = true
 	# just in case was previously in quitting attempt
 	$Interface/AnimationPlayer.stop(false)
-	# start dimming screen
+	# start dimming screen and sound
 	$Interface/AnimationPlayer.play("fade_out", -1, 1.0, false) 
 	yield($Interface/AnimationPlayer, "animation_finished")
 	if is_quitting == true: quit()
 
 func quit_interrupt():
 	is_quitting = false
-	# stop fadeout animation but retain position
+	# stop fadeout but retain position
 	$Interface/AnimationPlayer.stop(false) 
-	# revert to full brightness at 8x speed
+	# revert to full brightness and volume at 8x speed
 	$Interface/AnimationPlayer.play("fade_out", -1, -8.0, true) 
 	yield($Interface/AnimationPlayer, "animation_finished")
-	# reset fadeout animation
+	# reset fadeout progress
 	$Interface/AnimationPlayer.stop(true) 
 	$Interface/AnimationPlayer.play("reset")
 

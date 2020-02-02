@@ -1,22 +1,18 @@
 extends Node
 
-
-#var art_ext: bool = false
-var art_damp: bool = false
-#var art_stac: bool = false
-#var art_trem: bool = false
-
-var is_sustaining: bool = false
-
 signal note_played
 signal note_released
-
-var is_computer_busy: bool = false
-
 #signal key_pressed
 #signal key_released
 #signal hammer_pressed
 #signal hammer_released
+
+export(float, 0.0, 1.0, 0.050) var strike_cooldown := 0.1
+#var art_ext := false
+var art_damp := false
+#var art_stac := false
+#var art_trem := false
+var is_strike_cooldown := false
 
 func _input(event) -> void:
 #	Play handling sounds
@@ -65,7 +61,10 @@ func _input(event) -> void:
 #		art_trem = false
 
 #	Play notes on hammer
+#	TODO: fix bug where pressing multiple buttons along with spacebar simultaneously
+#	causes multiple notes to sound
 	if Input.is_action_just_pressed("hammer"):
+		cooldown()
 		var note_pitch = _get_note_pitch()
 		if note_pitch == 0:
 			$Instrument.play_sound_handling("hammer_strike")
@@ -74,15 +73,13 @@ func _input(event) -> void:
 			emit_signal("note_played", note_pitch)
 			$Instrument.play_sound_handling("hammer_strike")
 			$Instrument.play_note_sus(note_pitch)
-			is_sustaining = true
 			if art_damp == false: # if not dampened, also play attack sample
 				$Instrument.play_note_atk(note_pitch)
 
 #	Fade out Sustain sounds and play Release sounds
-	if Input.is_action_just_released("hammer") and is_sustaining == true :
+	if Input.is_action_just_released("hammer") and $Instrument.sus_base_playing != [] :
 		emit_signal("note_released")
 		$Instrument.stop_note_sus("Player")
-		is_sustaining = false
 		
 #	TODO Harmonic extensions
 
@@ -101,15 +98,16 @@ func _input(event) -> void:
 #	if Input.is_action_pressed("hammer"): emit_signal("key_pressed", "hammer")
 #	if Input.is_action_just_released("hammer"): emit_signal("key_released", "hammer")
 
-func _on_Computer_acknowledged() -> void:
-	is_computer_busy = true
 
-func _on_Computer_teaching_finished() -> void:
-	is_computer_busy = false
-	
+func cooldown():
+	is_strike_cooldown = true
+	yield(get_tree().create_timer(strike_cooldown), "timeout")
+	is_strike_cooldown = false
+
+
 # Determines which note pitch to play from keys held, basically binary
 # Fingering to play scale from lowest to highest:
-# A, F, AF, D, AD, DF, ADF, S, AS, SF, ASF, SD, ASD, SDF, ASDF	
+# A, F, AF, D, AD, DF, ADF, S, AS, SF, ASF, SD, ASD, SDF, ASDF
 func _get_note_pitch() -> int:
 	var key_1: = int(Input.is_action_pressed("key_1")) # A +1
 	var key_2: = int(Input.is_action_pressed("key_2")) # S +8

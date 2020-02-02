@@ -831,7 +831,5 @@ script = ExtResource( 31 )
 master_volume = -80.0
 [connection signal="note_played" from="Player" to="Computer" method="_on_Player_note_played"]
 [connection signal="note_released" from="Player" to="Computer" method="_on_Player_note_released"]
-[connection signal="acknowledged" from="Computer" to="Player" method="_on_Computer_acknowledged"]
-[connection signal="teaching_finished" from="Computer" to="Player" method="_on_Computer_teaching_finished"]
 [connection signal="assistant_said" from="Computer/Assistant" to="." method="_on_Assistant_assistant_said"]
 [connection signal="assistant_said" from="Computer/Assistant" to="Computer" method="_on_Assistant_assistant_said"]

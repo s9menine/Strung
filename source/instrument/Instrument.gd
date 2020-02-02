@@ -5,12 +5,14 @@ export var volume_range: float = -3.0
 var rng = RandomNumberGenerator.new()
 #var art_ext_last: bool = false
 var sus_base_playing := []
-var sus_ext_playing := []
+#var sus_ext_playing := []
 var release_pitch := []
+
 
 func _ready() -> void:
 	rng.randomize()
 	$AnimationPlayer.play("art_damp_reset")
+
 
 func play_note_atk(note_pitch, bus = "Attack"):
 	if note_pitch == 0: return
@@ -25,10 +27,11 @@ func play_note_atk(note_pitch, bus = "Attack"):
 	yield(_player, "finished")
 	_player.queue_free()
 
+
 func play_note_sus(note_pitch: int, bus = "Sustain"):
 	if note_pitch == 0: return
 	var stream_base: Resource = $NoteSusBase.notes_array[note_pitch]
-	var player_base := AudioStreamPlayer.new()	
+	var player_base := AudioStreamPlayer.new()
 	add_child(player_base)
 	player_base.stream = stream_base
 	player_base.volume_db = rng.randf_range(volume_range, 0)
@@ -54,10 +57,12 @@ func play_note_sus(note_pitch: int, bus = "Sustain"):
 #		yield(player_ext, "finished")
 #		player_ext.queue_free()
 
+
 func stop_note_sus(performer: String):
 	if sus_base_playing == []:
 		return
 	else:
+		print("Sustained notes: ", sus_base_playing)
 		var time_progress: float = 10.0 - $Timer.time_left
 #		print("Note length held for seconds: " + str(time_progress))
 		$Timer.stop()
@@ -73,8 +78,8 @@ func stop_note_sus(performer: String):
 		fade.interpolate_property(player_base, "volume_db", null, -80.0, 0.382, Tween.TRANS_SINE, Tween.EASE_OUT, 0)
 		fade.start()
 		yield(fade, "tween_completed")
-		fade.queue_free()
 		player_base.stop()
+		fade.queue_free()
 		player_base.queue_free()
 #		if art_ext_last == true:
 #			var player_ext = sus_ext_playing.pop_front()
@@ -88,7 +93,8 @@ func stop_note_sus(performer: String):
 #	else:
 #		$NoteSusBase.notes_array[note_pitch]
 #	play_note_rel(notes_playing.pop_front())
-	
+
+
 func play_note_rel(note_pitch: int, atten: float, bus: String):
 	var stream: Resource = $NoteRelBase.notes_array[note_pitch]
 #	print_filename(stream)
@@ -110,11 +116,13 @@ func dampen():
 	yield($AnimationPlayer, "animation_finished")
 	print($MixerBus.compressor_mix)
 
+
 func undampen():
 	$AnimationPlayer.stop(false)
 	$AnimationPlayer.play("art_dampen", -1, -2.0, true)
 	yield($AnimationPlayer, "animation_finished")
 	print($MixerBus.compressor_mix)
+
 
 func play_sound_handling(sound: String, bus: String = "Handling"):
 	# Determine which handling sound to play
