@@ -64,15 +64,19 @@ func _input(event) -> void:
 #	TODO: fix bug where pressing multiple buttons along with spacebar simultaneously
 #	causes multiple notes to sound
 	if Input.is_action_just_pressed("hammer"):
-		cooldown()
+		if is_strike_cooldown:
+			print("Strike on cooldown!")
+			return 
 		var note_pitch = _get_note_pitch()
 		if note_pitch == 0:
 			$Instrument.play_sound_handling("hammer_strike")
+			cooldown()
 			return
 		else:
 			emit_signal("note_played", note_pitch)
 			$Instrument.play_sound_handling("hammer_strike")
 			$Instrument.play_note_sus(note_pitch)
+			cooldown()
 			if art_damp == false: # if not dampened, also play attack sample
 				$Instrument.play_note_atk(note_pitch)
 
