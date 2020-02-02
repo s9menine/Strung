@@ -1,13 +1,19 @@
 extends Node
 
-signal assistant_said(content) # tells Main to show interface buttons
+signal assistant_said(content)
+# tells Main to show interface buttons
+# tells Computer to progress teaching
 
 const lines:Dictionary = {
-	0: preload("res://assets/computer/vo_assistant_01.ogg"), 
-	1: preload("res://assets/computer/vo_assistant_02.ogg"), 
-	2: preload("res://assets/computer/vo_assistant_03.ogg"), 
-	3: preload("res://assets/computer/vo_assistant_04.ogg"), 
-	4: preload("res://assets/computer/vo_assistant_05.ogg"), 
+	"introduction": preload("res://assets/computer/vo_assistant_01.ogg"), 
+	"request_response": preload("res://assets/computer/vo_assistant_02.ogg"), 
+	"waiting": preload("res://assets/computer/vo_assistant_03.ogg"), 
+	"accept_response": preload("res://assets/computer/vo_assistant_04.ogg"), 
+	"controls": preload("res://assets/computer/vo_assistant_05.ogg"), 
+	"progress_multikey": preload("res://assets/computer/vo_assistant_06.ogg"), 
+	"progress_halfway": preload("res://assets/computer/vo_assistant_07.ogg"), 
+	"progress_challenge": preload("res://assets/computer/vo_assistant_08.ogg"), 
+	"progress_graduate": preload("res://assets/computer/vo_assistant_09.ogg"), 
 }
 
 onready var player = $AudioStreamPlayer
@@ -18,12 +24,12 @@ var has_emitted_request := false
 func _ready() -> void:
 	emit_signal("assistant_said", "introduction")
 	yield(get_tree().create_timer(1.0), "timeout")
-	player.stream = lines[0]
+	player.stream = lines["introduction"]
 	player.play()
 	yield(player, "finished")
 	yield(get_tree().create_timer(0.2), "timeout")
 	if is_reply_pending: # in case player skips
-		player.stream = lines[1]
+		player.stream = lines["request_response"]
 		player.play()
 		emit_signal("assistant_said", "request_response")
 		has_emitted_request = true
@@ -36,12 +42,12 @@ func _waiting() -> void:
 		if is_reply_pending == false: return
 		yield(get_tree().create_timer(10.0), "timeout")
 		if is_reply_pending == false: return
-		player.stream = lines[2]
+		player.stream = lines["waiting"]
 		player.play()
 		yield(player, "finished")
 		if is_reply_pending == false: return
 		yield(get_tree().create_timer(0.2), "timeout")
-		player.stream = lines[1]
+		player.stream = lines["request_response"]
 		player.play()
 		yield(player, "finished")
 
@@ -55,7 +61,7 @@ func reply():
 
 func _accept():
 	emit_signal("assistant_said", "accept_response")
-	player.stream = lines[3]
+	player.stream = lines["accept_response"]
 	player.play()
 	yield(player, "finished")
 	emit_signal("assistant_said", "teaching")
@@ -66,8 +72,34 @@ func controls():
 		emit_signal("assistant_said", "request_response")
 	emit_signal("assistant_said", "controls")
 	yield(get_tree().create_timer(0.2), "timeout")
-	player.stream = lines[4]
+	player.stream = lines["controls"]
 	player.play()
+
+
+func progress(stage: String) -> void:
+	yield(get_tree().create_timer(0.2), "timeout")
+	print("Assistant says: ", stage)
+	match stage:
+		"progress_multikey":
+			player.stream = lines["progress_multikey"]
+			player.play()
+			yield(player, "finished")
+			emit_signal("assistant_said", "progress")
+		"progress_halfway":
+			player.stream = lines["progress_halfway"]
+			player.play()
+			yield(player, "finished")
+			emit_signal("assistant_said", "progress")
+		"progress_challenge":
+			player.stream = lines["progress_challenge"]
+			player.play()
+			yield(player, "finished")
+			emit_signal("assistant_said", "progress")
+		"progress_graduate":
+			player.stream = lines["progress_graduate"]
+			player.play()
+			yield(player, "finished")
+			emit_signal("assistant_said", "progress")
 
 
 func arts():
@@ -114,6 +146,9 @@ func skip():
 #I inform you of another available key of the Instrument.
 #Using your input interface, send the signal "A" to use it.
 #Using your input interface, send the signal "S" to use it.
+#
+#
+#
 #
 #I commend your understanding of the basics.
 #I advise you to try holding down multiple keys to sound the tones required for the following lessons.

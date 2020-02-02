@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/vo_assistant_06.ogg-68fa3f7c0c464483ac5b6ffdfc08fd16.oggstr"
+
+[deps]
+
+source_file="res://assets/computer/vo_assistant_06.ogg"
+dest_files=[ "res://.import/vo_assistant_06.ogg-68fa3f7c0c464483ac5b6ffdfc08fd16.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

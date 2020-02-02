@@ -20,6 +20,7 @@ const ACKNOWLEDGE = preload("res://assets/computer/system_acknowledge.wav")
 const CHIRP = preload("res://assets/computer/system_chirp.wav")
 const DENY = preload("res://assets/computer/system_deny.wav")
 const LESSONS = [
+#	!Assistant speaks here!
 #	lesson 0, introduce 2
 	[2], 
 	[4],
@@ -47,6 +48,7 @@ const LESSONS = [
 	[1, 1, 4, 2, 4, 2, 1],
 	[3, 2, 3, 2, 3, 2 ,3],
 
+#	!Assistant speaks here!
 #	lesson 8, introduce 3, the first multi-key tone
 	[1, 2, 1, 2, 3],
 	[3, 3, 3, 3, 4],
@@ -62,10 +64,10 @@ const LESSONS = [
 	[2, 2, 2, 2, 3],
 #	lesson 12
 	[2, 3, 4, 6, 4, 6],
-	[2, 2, 2, 2, 2 ,3],
+	[3, 3, 3, 3, 3 ,4],
 #	lesson 13
 	[1, 2, 3, 4, 6, 3, 2, 3, 6, 4],
-	[2, 2, 2, 2, 4, 2, 2, 2, 2, 4],
+	[3, 3, 3, 3, 4, 3, 3, 3, 3, 4],
 	
 #	lesson 14, introduce 5
 	[1, 4, 5, 1, 5, 4],
@@ -73,7 +75,8 @@ const LESSONS = [
 #	lesson 15
 	[4, 5, 6, 2, 3, 3, 4, 3, 4, 5, 6, 6],
 	[2, 2, 2, 2, 3, 3, 2, 2, 2, 2, 3, 3],
-	
+
+#	!Assistant speaks here!
 #	lesson 16, introduce 7
 	[1, 6, 7, 6, 7],
 	[3, 3, 3, 3, 3],
@@ -99,19 +102,20 @@ const LESSONS = [
 #	lesson 23, actually sounds good
 	[2, 4, 6, 5, 8, 7, 6, 4],
 	[2, 2, 2, 4, 2, 4, 2, 4],
-	
+
+#	!Assistant speaks here!
 #	lesson 24, final building crescendo for jam version
 	[1, 2, 4, 5, 7, 8],
 	[2, 4, 2, 4, 2, 4],
 #	lesson 25, introduce empty strike
-	[1, 2, 4, 5, 7, 8, 7, 5, 6],
-	[2, 4, 2, 4, 2, 4, 2, 2, 4],
+	[1, 2, 4, 5, 7, 8, 7, 5, 6, 0],
+	[2, 4, 2, 4, 2, 4, 2, 2, 3, 2],
 #	lesson 26
 	[1, 2, 4, 5, 7, 8, 7, 5, 6, 0, 4, 3, 6, 3],
 	[2, 4, 2, 4, 2, 4, 2, 2, 3, 0, 2, 4, 2, 4],
 #	lesson 27
-	[1, 2, 4, 5, 7, 8, 7, 5, 6, 0, 4, 3, 6, 3, 2, 3, 5, 7, 6],
-	[2, 4, 2, 4, 2, 4, 2, 2, 3, 0, 2, 4, 2, 4, 2, 2, 2, 2, 4],
+	[1, 2, 4, 5, 7, 8, 7, 5, 6, 0, 4, 3, 6, 3, 2, 3, 5, 7, 6, 0],
+	[2, 4, 2, 4, 2, 4, 2, 2, 3, 0, 2, 4, 2, 4, 2, 2, 2, 2, 3, 2],
 #	lesson 28, introduce 9
 	[
 		1, 2, 4, 5, 7, 8, 7, 5, 6, 0, 4, 3, 6, 3, 2, 3, 5, 7, 6, 0,
@@ -130,8 +134,11 @@ const LESSONS = [
 		2, 4, 2, 4, 2, 4, 2, 2, 3, 0, 2, 4, 2, 4, 2, 2, 2, 2, 3, 2,
 		2, 4, 2, 4, 2, 4, 2, 2, 3, 0, 2, 4, 2, 4, 2, 2, 4, 2, 4
 	],
-	
-	
+
+#	!Assistant speaks here!
+#	lesson 30, graduated
+
+
 #	actually sounds good
 #	[5, 10, 5, 10, 12, 12, 5, 10, 5, 10, 3, 3],
 #	[2, 2, 2, 2, 4, 4, 2, 2, 2, 2, 4, 4],

@@ -51,12 +51,22 @@ func _input(event: InputEvent) -> void:
 func advance():
 	player_pitches.clear()
 	current_lesson += 1
-	print("Now moving to lesson: " + str(current_lesson))
 	yield(get_tree().create_timer(rhythm2secs(5)), "timeout")
-	if is_computer_busy == false:
-		teach()
-	else:
-		is_computer_busy = false
+	match current_lesson:
+		8:
+			$Assistant.progress("progress_multikey")
+		16:
+			$Assistant.progress("progress_halfway")
+		24:
+			$Assistant.progress("progress_challenge")
+		30:
+			$Assistant.progress("progress_graduate")
+		_:
+			print("Now moving to lesson: " + str(current_lesson))
+			if is_computer_busy == false:
+				teach()
+			else:
+				is_computer_busy = false
 
 
 # fetches note sequences via lesson number then plays the notes
@@ -171,3 +181,7 @@ func _on_Assistant_assistant_said(content) -> void:
 		"controls":
 			yield($Assistant/AudioStreamPlayer, "finished")
 			is_computer_busy = false
+		"progress":
+#			this signal is emitted after a yield(AudioStreamPlayer, finished)
+			is_computer_busy = false
+			teach()

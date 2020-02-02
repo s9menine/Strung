@@ -805,7 +805,7 @@ Instances its own Instrument.
 Handles level/lesson progression.
 Plays assistant voicelines."
 }
-time = 0.5
+time = 0.52
 
 [node name="Assistant" parent="Computer" instance=ExtResource( 27 )]
 
