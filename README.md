@@ -6,12 +6,14 @@ https://s9menine.itch.io/strung
 
 -----,-----
 
-Controls:
+**Instructions:**
 
-- Use A, S, D, F, and the Spacebar keys to play the Instrument. You should hear things happening when using these keys, by themselves or in certain combinations. Experiment!
-- Press R to interact with the computer. Tab and Enter will also work.
-- The Arrow Keys (Up, Down, Left, Right) can also change how things sound, but are optional and not required to finish the game.
-- Hold the ESC key to exit the game.
+- Hold down one or more of the A, S, D, F letter keys to choose a tone.
+- Press the Spacebar key to play the Instrument.
+- Press the R letter key to replay the target sequence. The Tab and Enter keys will also work.
+- If at any time keyboard inputs stop working, please try clicking on the game again to give it focus.
+- To exit the game in the browser version, simply close the webpage. In downloaded versions you will need to hold the ESC (escape) key instead.
+- If you want to devise your own levels, download Godot Engine 3.2, open the project, and mess around with "Course.gd".
 
 -----,-----
 
