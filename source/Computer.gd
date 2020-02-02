@@ -1,5 +1,8 @@
 extends Node
 
+signal acknowledged
+signal teaching_finished
+
 export(float, 0.0, 3.0) var time: float
 export(int, 0, 100, 1) var current_lesson := 0
 #var pitches_index := 0
@@ -11,14 +14,13 @@ var is_player_playing := false
 var is_computer_busy := false
 var is_reply_pending := false
 
-signal acknowledged
-signal teaching_finished
 
 func _ready() -> void:
 	$AudioStreamPlayer.stream = $Course.ACKNOWLEDGE
 	$AudioStreamPlayer.play()
 	yield($AudioStreamPlayer, "finished")
 #	advance()
+
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"):
@@ -38,11 +40,12 @@ func _input(event: InputEvent) -> void:
 		if has_skipped:
 			$Assistant.skip()
 			has_skipped = true
-			is_computer_busy == false
+			is_computer_busy = false
 		else:
 			$AudioStreamPlayer.stream = $Course.ACKNOWLEDGE
 			$AudioStreamPlayer.play()
 			advance()
+
 
 # increments current_lesson
 func advance():
@@ -53,7 +56,8 @@ func advance():
 	if is_computer_busy == false:
 		teach()
 	else:
-		is_computer_busy == false
+		is_computer_busy = false
+
 
 # fetches note sequences via lesson number then plays the notes
 func teach():
@@ -75,14 +79,16 @@ func teach():
 		var _rhythm:float = rhythm2secs(target_rhythms[i])
 		yield(get_tree().create_timer(_rhythm),"timeout")
 		$Instrument.stop_note_sus("Computer")
-		yield(get_tree().create_timer(rhythm2secs(1)),"timeout")
+		yield(get_tree().create_timer(rhythm2secs(0)),"timeout")
 		i += 1
 	is_computer_busy = false
 	emit_signal("teaching_finished")
 
+
 func repeat():
 	player_pitches.clear()
 	teach()
+
 
 func _on_Player_note_played(note_pitch):
 	is_player_playing = true
@@ -101,9 +107,11 @@ func _on_Player_note_played(note_pitch):
 		yield(get_parent().get_node("Player"), "note_released")
 		acknowledge()
 
+
 func _on_Player_note_released() -> void:
 	is_player_playing = false
 #	yield(get_tree().create_timer(rhythm2secs(2)), "timeout")
+
 
 func acknowledge():
 	print("Acknowledged!")
@@ -116,6 +124,7 @@ func acknowledge():
 
 func graduate():
 	print("Graduated!")
+	$Assistant.arts()
 	target_pitches = [99] # an impossible note to play
 	$AudioStreamPlayer.stream = $Course.CHIRP
 	$AudioStreamPlayer.play()

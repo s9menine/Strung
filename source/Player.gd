@@ -1,7 +1,7 @@
 extends Node
 
-signal note_played
-signal note_released
+signal note_played # Tells Computer which notes player plays, to compare sequences
+signal note_released # If note released too fast, tells Computer to clear sequence
 #signal key_pressed
 #signal key_released
 #signal hammer_pressed
@@ -68,12 +68,12 @@ func _input(event) -> void:
 			print("Strike on cooldown!")
 			return 
 		var note_pitch = _get_note_pitch()
+		emit_signal("note_played", note_pitch) # Computer receives this signal
 		if note_pitch == 0:
 			$Instrument.play_sound_handling("hammer_strike")
 			cooldown()
 			return
 		else:
-			emit_signal("note_played", note_pitch)
 			$Instrument.play_sound_handling("hammer_strike")
 			$Instrument.play_note_sus(note_pitch)
 			cooldown()
@@ -82,7 +82,7 @@ func _input(event) -> void:
 
 #	Fade out Sustain sounds and play Release sounds
 	if Input.is_action_just_released("hammer") and $Instrument.sus_base_playing != [] :
-		emit_signal("note_released")
+		emit_signal("note_released") # Computer receives this signal
 		$Instrument.stop_note_sus("Player")
 		
 #	TODO Harmonic extensions

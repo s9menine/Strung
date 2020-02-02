@@ -3,6 +3,7 @@ extends Node
 var esc_progress: float = 0.0
 var is_quitting: bool = false
 var os_name: String = ""
+var is_interact_shown := false
 
 func _ready() -> void:
 	AudioServer.set_bus_layout(preload("res://assets/bus_layout.tres"))
@@ -14,10 +15,11 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_released("exit") and os_name != "HTML5":
 		quit_interrupt()
 
-func _on_Assistant_assistant_said(content) -> void:
+func _on_Assistant_assistant_said(content) -> void:	
 	match content:
 		"request_response":
 			$Interface/AnimationPlayer.play("fade_in_key_interact")
+			is_interact_shown = true
 		"controls":
 			$Interface/AnimationPlayer.play("fade_in_key_a")
 			yield($Interface/AnimationPlayer, "animation_finished")
@@ -25,6 +27,8 @@ func _on_Assistant_assistant_said(content) -> void:
 			yield($Interface/AnimationPlayer, "animation_finished")
 			$Interface/AnimationPlayer.play("fade_in_key_basics")
 			yield($Interface/AnimationPlayer, "animation_finished")
+			if is_interact_shown == false:
+				$Interface/AnimationPlayer.play("fade_in_key_interact")
 		"arts":
 			$Interface/AnimationPlayer.play("fade_in_arts")
 
@@ -55,8 +59,6 @@ func quit():
 #	get_tree().change_scene_to(reset_scene)
 
 #UNUSED CREDITS
-#"Assistant" inspired by Dan Vogt's "Mother" from DATA WING
-#Begin link: [http://www.danvogt.info/] End Link.
 #
 #Story setting inspired by John Ayliff's Seedship
 #Begin link: [https://johnayliff.itch.io/seedship] End Link.

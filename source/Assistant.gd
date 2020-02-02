@@ -1,5 +1,7 @@
 extends Node
 
+signal assistant_said(content) # tells Main to show interface buttons
+
 const lines:Dictionary = {
 	0: preload("res://assets/computer/vo_assistant_01.ogg"), 
 	1: preload("res://assets/computer/vo_assistant_02.ogg"), 
@@ -8,11 +10,10 @@ const lines:Dictionary = {
 	4: preload("res://assets/computer/vo_assistant_05.ogg"), 
 }
 
+onready var player = $AudioStreamPlayer
 var is_reply_pending := true
 var has_emitted_request := false
-onready var player = $AudioStreamPlayer
 
-signal assistant_said(content)
 
 func _ready() -> void:
 	emit_signal("assistant_said", "introduction")
@@ -29,6 +30,7 @@ func _ready() -> void:
 		yield(player, "finished")
 		_waiting()
 
+
 func _waiting() -> void:
 	while is_reply_pending:
 		if is_reply_pending == false: return
@@ -42,12 +44,14 @@ func _waiting() -> void:
 		player.stream = lines[1]
 		player.play()
 		yield(player, "finished")
-	
+
+
 func reply():
 	is_reply_pending = false
 	print(is_reply_pending)
 	player.stop()
 	_accept()
+
 
 func _accept():
 	emit_signal("assistant_said", "accept_response")
@@ -55,7 +59,8 @@ func _accept():
 	player.play()
 	yield(player, "finished")
 	emit_signal("assistant_said", "teaching")
-	
+
+
 func controls():
 	if not has_emitted_request:
 		emit_signal("assistant_said", "request_response")
@@ -64,10 +69,16 @@ func controls():
 	player.stream = lines[4]
 	player.play()
 
+
+func arts():
+	emit_signal("assistant_said", "arts")
+
+
 func skip():
 	is_reply_pending = false
 	player.stop()
 	queue_free()
+
 
 ################## SCRIPT
 #I sense neural network activity.
@@ -103,3 +114,20 @@ func skip():
 #I inform you of another available key of the Instrument.
 #Using your input interface, send the signal "A" to use it.
 #Using your input interface, send the signal "S" to use it.
+#
+#I commend your understanding of the basics.
+#I advise you to try holding down multiple keys to sound the tones required for the following lessons.
+#
+#I announce that you are now halfway through this course.
+#I admit that it is the easier half, in jest.
+#I remind you that this does not invalidate your journey.
+#
+#I congratulate you for progressing thus far.
+#I invite you to savour your newfound skills.
+#I have prepared for you a final challenge.
+#I wish you good luck.
+#
+#I am in awe over your mastery of the Instrument.
+#Well done.
+#I have nothing more to teach you.
+#Thank you.

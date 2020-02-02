@@ -11,6 +11,9 @@ Begin link: [https://sethares.engr.wisc.edu/papers/hyperInstruments.html] End Li
 Golden ratio musical scale by Sevish
 Begin link: [https://sevish.com/2017/golden-ratio-music-interval/] End Link.
 
+"Assistant" dialogue inspired by Dan Vogt's "Mother" from DATA WING
+Begin link: [http://www.danvogt.info/] End Link.
+
 ​-----,​-----​​
 
 Special thanks to the following for testing and feedback! Love y'all [heart emoji]
@@ -45,6 +48,9 @@ Begin link: [https://impulserecord.com/project/convology-xt-plugin/] End Link.
 
 Hearling Text-To-Speech
 Begin link: [https://hearling.com/] End Link.
+
+Graillon Voice Changer by Auburn Sounds
+Begin link: [https://www.auburnsounds.com/products/Graillon.html] End Link.
 
 And various sound effect libraries from all over the place.
 
@@ -85,33 +91,6 @@ SOFTWARE.
 Godot Engine logo by Andrea Calabró
 Licensed under CC-BY-3.0
 https://creativecommons.org/licenses/by/3.0/
-
-​-----,​-----​​
-
-Godot Mixing Desk
-https://github.com/kyzfrintin/Godot-Mixing-Desk/blob/master/LICENSE
-
-MIT License
-
-Copyright (c) 2018 kyzfrintin
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
 
 ​-----,​-----​​
 

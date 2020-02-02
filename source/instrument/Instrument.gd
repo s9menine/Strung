@@ -15,7 +15,12 @@ func _ready() -> void:
 
 
 func play_note_atk(note_pitch, bus = "Attack"):
-	if note_pitch == 0: return
+	if note_pitch == 0:
+		if bus == "Computer":
+			play_sound_handling("hammer_strike", "Computer")
+			return
+		else:
+			return
 	var stream: Resource = $NoteAtk.notes_array[note_pitch]
 #	print_filename(stream)
 	var _player := AudioStreamPlayer.new()
@@ -62,7 +67,7 @@ func stop_note_sus(performer: String):
 	if sus_base_playing == []:
 		return
 	else:
-		print("Sustained notes: ", sus_base_playing)
+#		print("Sustained notes: ", sus_base_playing)
 		var time_progress: float = 10.0 - $Timer.time_left
 #		print("Note length held for seconds: " + str(time_progress))
 		$Timer.stop()

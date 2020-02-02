@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=17 format=2]
+[gd_resource type="AudioBusLayout" load_steps=18 format=2]
 
 [sub_resource type="AudioEffectCompressor" id=1]
 resource_name = "Compressor"
@@ -85,6 +85,19 @@ pan = -0.07
 resource_name = "PitchShift"
 pitch_scale = 1.1
 
+[sub_resource type="AudioEffectDelay" id=17]
+resource_name = "Delay"
+tap1/delay_ms = 139.0
+tap1/level_db = -15.5
+tap1/pan = 0.18
+tap2/delay_ms = 159.0
+tap2/level_db = -15.5
+tap2/pan = -0.17
+feedback/active = true
+feedback/delay_ms = 146.0
+feedback/level_db = -9.0
+feedback/lowpass = 11873.0
+
 [sub_resource type="AudioEffectCompressor" id=16]
 resource_name = "Compressor"
 threshold = -16.8
@@ -94,7 +107,7 @@ release_ms = 171.0
 mix = 0.0
 
 [resource]
-bus/0/volume_db = -0.130497
+bus/0/volume_db = -0.197157
 bus/0/effect/0/effect = SubResource( 1 )
 bus/0/effect/0/enabled = true
 bus/0/effect/1/effect = SubResource( 2 )
@@ -137,10 +150,12 @@ bus/4/name = "System"
 bus/4/solo = false
 bus/4/mute = false
 bus/4/bypass_fx = false
-bus/4/volume_db = -11.9743
+bus/4/volume_db = -9.24675
 bus/4/send = "Computer"
 bus/4/effect/0/effect = SubResource( 15 )
-bus/4/effect/0/enabled = false
+bus/4/effect/0/enabled = true
+bus/4/effect/1/effect = SubResource( 17 )
+bus/4/effect/1/enabled = true
 bus/5/name = "Assistant"
 bus/5/solo = false
 bus/5/mute = false
@@ -177,13 +192,13 @@ bus/10/name = "Handling"
 bus/10/solo = false
 bus/10/mute = false
 bus/10/bypass_fx = false
-bus/10/volume_db = -19.832
+bus/10/volume_db = -13.9692
 bus/10/send = "Instrument"
 bus/11/name = "Key 1"
 bus/11/solo = false
 bus/11/mute = false
 bus/11/bypass_fx = false
-bus/11/volume_db = 0.0
+bus/11/volume_db = -7.2126
 bus/11/send = "Handling"
 bus/11/effect/0/effect = SubResource( 5 )
 bus/11/effect/0/enabled = true
@@ -191,7 +206,7 @@ bus/12/name = "Key 2"
 bus/12/solo = false
 bus/12/mute = false
 bus/12/bypass_fx = false
-bus/12/volume_db = 0.0
+bus/12/volume_db = -6.9102
 bus/12/send = "Handling"
 bus/12/effect/0/effect = SubResource( 6 )
 bus/12/effect/0/enabled = true
@@ -199,7 +214,7 @@ bus/13/name = "Key 3"
 bus/13/solo = false
 bus/13/mute = false
 bus/13/bypass_fx = false
-bus/13/volume_db = 0.0
+bus/13/volume_db = -6.57136
 bus/13/send = "Handling"
 bus/13/effect/0/effect = SubResource( 7 )
 bus/13/effect/0/enabled = true
@@ -207,7 +222,7 @@ bus/14/name = "Key 4"
 bus/14/solo = false
 bus/14/mute = false
 bus/14/bypass_fx = false
-bus/14/volume_db = 0.0
+bus/14/volume_db = -7.09376
 bus/14/send = "Handling"
 bus/14/effect/0/effect = SubResource( 8 )
 bus/14/effect/0/enabled = true
