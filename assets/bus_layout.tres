@@ -45,16 +45,16 @@ pan = 0.38
 [sub_resource type="AudioEffectCompressor" id=19]
 resource_name = "Compressor"
 threshold = -20.5
-ratio = 2.6
-release_ms = 1136.0
+ratio = 1.8
+release_ms = 857.0
 sidechain = "Instrument"
 
 [sub_resource type="AudioEffectCompressor" id=20]
 resource_name = "Compressor"
 threshold = -23.7
-ratio = 3.6
+ratio = 2.5
 attack_us = 48.0
-release_ms = 1232.0
+release_ms = 889.0
 sidechain = "Computer"
 
 [sub_resource type="AudioEffectReverb" id=9]

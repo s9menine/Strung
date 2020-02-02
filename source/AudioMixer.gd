@@ -6,5 +6,6 @@ func _setter(value):
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), value)
 	master_volume = value
 
+
 func _getter():
 	return master_volume

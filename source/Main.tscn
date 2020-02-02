@@ -260,7 +260,7 @@ tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
 "times": PoolRealArray( 0, 1.62 ),
-"transitions": PoolRealArray( 3.03143, 1 ),
+"transitions": PoolRealArray( 2.29739, 1 ),
 "update": 0,
 "values": [ 0.0, -80.0 ]
 }
@@ -780,6 +780,7 @@ __meta__ = {
 }
 
 [node name="Curtains" type="ColorRect" parent="Interface"]
+modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.0666667, 0, 0.133333, 1 )
@@ -828,8 +829,7 @@ bus = "Ambience"
 
 [node name="AudioMixer" type="Node" parent="."]
 script = ExtResource( 31 )
-master_volume = -80.0
 [connection signal="note_played" from="Player" to="Computer" method="_on_Player_note_played"]
 [connection signal="note_released" from="Player" to="Computer" method="_on_Player_note_released"]
-[connection signal="assistant_said" from="Computer/Assistant" to="." method="_on_Assistant_assistant_said"]
 [connection signal="assistant_said" from="Computer/Assistant" to="Computer" method="_on_Assistant_assistant_said"]
+[connection signal="assistant_said" from="Computer/Assistant" to="." method="_on_Assistant_assistant_said"]

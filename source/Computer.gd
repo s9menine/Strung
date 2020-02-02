@@ -97,7 +97,10 @@ func teach():
 
 func repeat():
 	player_pitches.clear()
-	teach()
+	if current_lesson >= 30:
+		graduate()
+	else:
+		teach()
 
 
 func _on_Player_note_played(note_pitch):
@@ -132,14 +135,15 @@ func acknowledge():
 	yield($AudioStreamPlayer, "finished")
 	advance()
 
+
 func graduate():
 	print("Graduated!")
 	$Assistant.arts()
 	target_pitches = [99] # an impossible note to play
 	$AudioStreamPlayer.stream = $Course.CHIRP
 	$AudioStreamPlayer.play()
-	
-	
+
+
 func rhythm2secs(rhythm: int) -> float:
 	var secs: float
 	match rhythm:
@@ -160,6 +164,7 @@ func rhythm2secs(rhythm: int) -> float:
 		_: # fallback, same value as "3"
 			secs = time
 	return secs
+
 
 func _on_Assistant_assistant_said(content) -> void:
 	is_computer_busy = true
