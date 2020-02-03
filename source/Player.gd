@@ -71,39 +71,31 @@ func _input(event) -> void:
 		emit_signal("note_played", note_pitch) # Computer receives this signal
 		if note_pitch == 0:
 			$Instrument.play_sound_handling("hammer_strike")
-			cooldown()
+			_cooldown()
 			return
 		else:
 			$Instrument.play_sound_handling("hammer_strike")
 			$Instrument.play_note_sus(note_pitch)
-			cooldown()
+			_cooldown()
 			if art_damp == false: # if not dampened, also play attack sample
 				$Instrument.play_note_atk(note_pitch)
 
 #	Fade out Sustain sounds and play Release sounds
-	if Input.is_action_just_released("hammer") and $Instrument.sus_base_playing != [] :
+	if Input.is_action_just_released("hammer"): # and $Instrument.sus_base_playing != []
 		emit_signal("note_released") # Computer receives this signal
 		$Instrument.stop_note_sus("Player")
-		
+
+
 #	TODO Harmonic extensions
+
 
 #	TODO Staccato
 
+
 #	TODO Vibrato
 
-#	if Input.is_action_pressed("key_1"): emit_signal("key_pressed", "key_1")
-#	if Input.is_action_pressed("key_2"): emit_signal("key_pressed", "key_2")
-#	if Input.is_action_pressed("key_3"): emit_signal("key_pressed", "key_3")
-#	if Input.is_action_pressed("key_4"): emit_signal("key_pressed", "key_4")
-#	if Input.is_action_just_released("key_1"): emit_signal("key_released", "key_1")
-#	if Input.is_action_just_released("key_2"): emit_signal("key_released", "key_2")
-#	if Input.is_action_just_released("key_3"): emit_signal("key_released", "key_3")
-#	if Input.is_action_just_released("key_4"): emit_signal("key_released", "key_4")
-#	if Input.is_action_pressed("hammer"): emit_signal("key_pressed", "hammer")
-#	if Input.is_action_just_released("hammer"): emit_signal("key_released", "hammer")
 
-
-func cooldown():
+func _cooldown():
 	is_strike_cooldown = true
 	yield(get_tree().create_timer(strike_cooldown), "timeout")
 	is_strike_cooldown = false

@@ -4,6 +4,7 @@ var esc_progress: float = 0.0
 var is_quitting: bool = false
 var os_name: String = ""
 var is_interact_shown := false
+var is_controls_shown := false
 
 func _ready() -> void:
 	AudioServer.set_bus_layout(preload("res://assets/bus_layout.tres"))
@@ -15,22 +16,40 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_released("exit") and os_name != "HTML5":
 		quit_interrupt()
 
-func _on_Assistant_assistant_said(content) -> void:	
+func _on_Assistant_assistant_said(content) -> void:
 	match content:
 		"request_response":
-			$Interface/AnimationPlayer.play("fade_in_key_interact")
-			is_interact_shown = true
+			show_interact()
 		"controls":
-			$Interface/AnimationPlayer.play("fade_in_key_a")
-			yield($Interface/AnimationPlayer, "animation_finished")
-			$Interface/AnimationPlayer.play("fade_in_key_s")
-			yield($Interface/AnimationPlayer, "animation_finished")
-			$Interface/AnimationPlayer.play("fade_in_key_basics")
-			yield($Interface/AnimationPlayer, "animation_finished")
-			if is_interact_shown == false:
-				$Interface/AnimationPlayer.play("fade_in_key_interact")
+			show_controls()
 		"arts":
-			$Interface/AnimationPlayer.play("fade_in_arts")
+			show_arts()
+
+
+func show_interact():
+	$Interface/AnimationPlayer.play("fade_in_key_interact")
+	yield($Interface/AnimationPlayer, "animation_finished")
+	is_interact_shown = true
+
+
+func show_controls():
+	$Interface/AnimationPlayer.play("fade_in_key_a")
+	yield($Interface/AnimationPlayer, "animation_finished")
+	$Interface/AnimationPlayer.play("fade_in_key_s")
+	yield($Interface/AnimationPlayer, "animation_finished")
+	$Interface/AnimationPlayer.play("fade_in_key_basics")
+	is_controls_shown = true
+	yield($Interface/AnimationPlayer, "animation_finished")
+	if is_interact_shown == false:
+		show_interact()
+
+
+func show_arts():
+	$Interface/AnimationPlayer.play("fade_in_arts")
+	yield($Interface/AnimationPlayer, "animation_finished")
+	if is_controls_shown == false:
+		show_controls()
+
 
 func quit_start():
 	is_quitting = true

@@ -32,7 +32,7 @@
 [ext_resource path="res://assets/ambience/ambience.ogg" type="AudioStream" id=30]
 [ext_resource path="res://source/AudioMixer.gd" type="Script" id=31]
 
-[sub_resource type="Animation" id=23]
+[sub_resource type="Animation" id=1]
 resource_name = "fade_in_arts"
 length = 1.62
 step = 0.02
@@ -61,7 +61,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=24]
+[sub_resource type="Animation" id=2]
 resource_name = "fade_in_key_a"
 length = 1.62
 step = 0.02
@@ -90,7 +90,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=25]
+[sub_resource type="Animation" id=3]
 resource_name = "fade_in_key_basics"
 length = 1.62
 step = 0.02
@@ -167,7 +167,7 @@ tracks/5/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=31]
+[sub_resource type="Animation" id=4]
 resource_name = "fade_in_key_interact"
 length = 1.62
 step = 0.02
@@ -196,7 +196,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=26]
+[sub_resource type="Animation" id=5]
 resource_name = "fade_in_key_s"
 length = 1.62
 step = 0.02
@@ -225,7 +225,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=27]
+[sub_resource type="Animation" id=6]
 length = 1.62
 step = 0.02
 tracks/0/type = "value"
@@ -265,7 +265,7 @@ tracks/2/keys = {
 "values": [ 0.0, -80.0 ]
 }
 
-[sub_resource type="Animation" id=28]
+[sub_resource type="Animation" id=7]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("Curtains:visible")
@@ -292,81 +292,79 @@ tracks/1/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=8]
 size = 100
 outline_color = Color( 0.933333, 0.866667, 0.8, 1 )
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=9]
 size = 32
 outline_color = Color( 0.933333, 0.866667, 0.8, 1 )
 font_data = ExtResource( 23 )
 
-[sub_resource type="InputEventAction" id=3]
-action = "key_1"
-
-[sub_resource type="ShortCut" id=4]
-shortcut = SubResource( 3 )
-
-[sub_resource type="ButtonGroup" id=5]
-resource_name = "Keys"
-
-[sub_resource type="InputEventAction" id=6]
-action = "key_2"
-
-[sub_resource type="ShortCut" id=7]
-shortcut = SubResource( 6 )
-
-[sub_resource type="InputEventAction" id=8]
-action = "key_3"
-
-[sub_resource type="ShortCut" id=9]
-shortcut = SubResource( 8 )
-
 [sub_resource type="InputEventAction" id=10]
-action = "key_4"
+action = "key_1"
 
 [sub_resource type="ShortCut" id=11]
 shortcut = SubResource( 10 )
 
-[sub_resource type="InputEventAction" id=12]
-action = "hammer"
+[sub_resource type="ButtonGroup" id=12]
 
-[sub_resource type="ShortCut" id=13]
-shortcut = SubResource( 12 )
+[sub_resource type="InputEventAction" id=13]
+action = "key_2"
 
-[sub_resource type="InputEventAction" id=14]
-action = "art_up"
+[sub_resource type="ShortCut" id=14]
+shortcut = SubResource( 13 )
 
-[sub_resource type="ShortCut" id=15]
-shortcut = SubResource( 14 )
+[sub_resource type="InputEventAction" id=15]
+action = "key_3"
 
-[sub_resource type="ButtonGroup" id=16]
-resource_name = "Articulations"
+[sub_resource type="ShortCut" id=16]
+shortcut = SubResource( 15 )
 
 [sub_resource type="InputEventAction" id=17]
-action = "art_left"
+action = "key_4"
 
 [sub_resource type="ShortCut" id=18]
 shortcut = SubResource( 17 )
 
 [sub_resource type="InputEventAction" id=19]
-action = "art_down"
+action = "hammer"
 
 [sub_resource type="ShortCut" id=20]
 shortcut = SubResource( 19 )
 
 [sub_resource type="InputEventAction" id=21]
-action = "art_right"
+action = "art_up"
 
 [sub_resource type="ShortCut" id=22]
 shortcut = SubResource( 21 )
 
-[sub_resource type="InputEventAction" id=29]
+[sub_resource type="ButtonGroup" id=23]
+
+[sub_resource type="InputEventAction" id=24]
+action = "art_left"
+
+[sub_resource type="ShortCut" id=25]
+shortcut = SubResource( 24 )
+
+[sub_resource type="InputEventAction" id=26]
+action = "art_down"
+
+[sub_resource type="ShortCut" id=27]
+shortcut = SubResource( 26 )
+
+[sub_resource type="InputEventAction" id=28]
+action = "art_right"
+
+[sub_resource type="ShortCut" id=29]
+shortcut = SubResource( 28 )
+
+[sub_resource type="InputEventAction" id=30]
 action = "interact"
 
-[sub_resource type="ShortCut" id=30]
-shortcut = SubResource( 29 )
+[sub_resource type="ShortCut" id=31]
+shortcut = SubResource( 30 )
 
 [node name="Main" type="Node"]
 script = ExtResource( 25 )
@@ -396,13 +394,13 @@ add touch function for buttons for?"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Interface"]
 autoplay = "reset"
-anims/fade_in_arts = SubResource( 23 )
-anims/fade_in_key_a = SubResource( 24 )
-anims/fade_in_key_basics = SubResource( 25 )
-anims/fade_in_key_interact = SubResource( 31 )
-anims/fade_in_key_s = SubResource( 26 )
-anims/fade_out = SubResource( 27 )
-anims/reset = SubResource( 28 )
+anims/fade_in_arts = SubResource( 1 )
+anims/fade_in_key_a = SubResource( 2 )
+anims/fade_in_key_basics = SubResource( 3 )
+anims/fade_in_key_interact = SubResource( 4 )
+anims/fade_in_key_s = SubResource( 5 )
+anims/fade_out = SubResource( 6 )
+anims/reset = SubResource( 7 )
 
 [node name="Background" type="ColorRect" parent="Interface"]
 anchor_right = 1.0
@@ -437,7 +435,7 @@ __meta__ = {
 [node name="Title" type="Label" parent="Interface/MarginContainer/VSplitContainer"]
 margin_right = 800.0
 margin_bottom = 127.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 8 )
 custom_colors/font_color = Color( 0.933333, 0.866667, 0.8, 1 )
 text = "Strung"
 align = 2
@@ -447,7 +445,7 @@ visible = false
 margin_top = 131.0
 margin_right = 800.0
 margin_bottom = 216.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 9 )
 custom_colors/font_color = Color( 0.933333, 0.866667, 0.8, 1 )
 text = "Press R to replay target phrase
 Repeat this phrase to advance"
@@ -504,8 +502,8 @@ mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
 action_mode = 0
-shortcut = SubResource( 4 )
-group = SubResource( 5 )
+shortcut = SubResource( 11 )
+group = SubResource( 12 )
 texture_normal = ExtResource( 12 )
 texture_pressed = ExtResource( 9 )
 expand = true
@@ -528,8 +526,8 @@ mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
 action_mode = 0
-shortcut = SubResource( 7 )
-group = SubResource( 5 )
+shortcut = SubResource( 14 )
+group = SubResource( 12 )
 texture_normal = ExtResource( 13 )
 texture_pressed = ExtResource( 10 )
 expand = true
@@ -552,8 +550,8 @@ mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
 action_mode = 0
-shortcut = SubResource( 9 )
-group = SubResource( 5 )
+shortcut = SubResource( 16 )
+group = SubResource( 12 )
 texture_normal = ExtResource( 7 )
 texture_pressed = ExtResource( 11 )
 expand = true
@@ -576,8 +574,8 @@ mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
 action_mode = 0
-shortcut = SubResource( 11 )
-group = SubResource( 5 )
+shortcut = SubResource( 18 )
+group = SubResource( 12 )
 texture_normal = ExtResource( 8 )
 texture_pressed = ExtResource( 14 )
 expand = true
@@ -592,7 +590,7 @@ mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.62
-shortcut = SubResource( 13 )
+shortcut = SubResource( 20 )
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 6 )
 expand = true
@@ -650,8 +648,8 @@ margin_bottom = 64.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 action_mode = 0
-shortcut = SubResource( 15 )
-group = SubResource( 16 )
+shortcut = SubResource( 22 )
+group = SubResource( 23 )
 texture_normal = ExtResource( 15 )
 texture_pressed = ExtResource( 20 )
 
@@ -686,8 +684,8 @@ margin_bottom = 73.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 action_mode = 0
-shortcut = SubResource( 18 )
-group = SubResource( 16 )
+shortcut = SubResource( 25 )
+group = SubResource( 23 )
 texture_normal = ExtResource( 16 )
 texture_pressed = ExtResource( 17 )
 
@@ -705,8 +703,8 @@ margin_bottom = 73.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 action_mode = 0
-shortcut = SubResource( 20 )
-group = SubResource( 16 )
+shortcut = SubResource( 27 )
+group = SubResource( 23 )
 texture_normal = ExtResource( 18 )
 texture_pressed = ExtResource( 19 )
 
@@ -725,8 +723,8 @@ margin_bottom = 73.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 action_mode = 0
-shortcut = SubResource( 22 )
-group = SubResource( 16 )
+shortcut = SubResource( 29 )
+group = SubResource( 23 )
 texture_normal = ExtResource( 21 )
 texture_pressed = ExtResource( 22 )
 
@@ -769,8 +767,8 @@ mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
 action_mode = 0
-shortcut = SubResource( 30 )
-group = SubResource( 5 )
+shortcut = SubResource( 31 )
+group = SubResource( 12 )
 texture_normal = ExtResource( 29 )
 texture_pressed = ExtResource( 28 )
 expand = true
@@ -831,5 +829,5 @@ bus = "Ambience"
 script = ExtResource( 31 )
 [connection signal="note_played" from="Player" to="Computer" method="_on_Player_note_played"]
 [connection signal="note_released" from="Player" to="Computer" method="_on_Player_note_released"]
-[connection signal="assistant_said" from="Computer/Assistant" to="Computer" method="_on_Assistant_assistant_said"]
 [connection signal="assistant_said" from="Computer/Assistant" to="." method="_on_Assistant_assistant_said"]
+[connection signal="assistant_said" from="Computer/Assistant" to="Computer" method="_on_Assistant_assistant_said"]

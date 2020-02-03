@@ -143,10 +143,20 @@ func play_sound_handling(sound: String, bus: String = "Handling"):
 	elif sound == "hammer_strike" :
 		stream = $Handling.hammer_strike()
 	# Create AudioStreamPlayer node, add it to SceneTree, play it, destroy it
+	var _key_pitch := 0.0
+	match bus:
+		"Key 1":
+			_key_pitch = -0.618
+		"Key 2":
+			_key_pitch = 0.618
+		"Key 3":
+			_key_pitch = 0.0
+		"Key 4":
+			_key_pitch = -0.382
 	var _player := AudioStreamPlayer.new()
 	add_child(_player)
 	_player.stream = stream
-	_player.pitch_scale = rng.randf_range(0.81, 1.19) # +- 3 semitones
+	_player.pitch_scale = _key_pitch + rng.randf_range(0.88, 1.12)
 	_player.volume_db = rng.randf_range(volume_range, 0)
 #	bus adds panning for Keys 1-4
 	_player.set_bus(bus) 

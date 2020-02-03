@@ -18,21 +18,22 @@ const lines:Dictionary = {
 
 onready var player = $AudioStreamPlayer
 var is_reply_pending := true
-var has_emitted_request := false
+var has_emitted_controls := false
 
 
 func _ready() -> void:
+	# says introduction line
 	emit_signal("assistant_said", "introduction")
 	yield(get_tree().create_timer(1.0), "timeout")
 	player.stream = lines["introduction"]
 	player.play()
 	yield(player, "finished")
 	yield(get_tree().create_timer(0.2), "timeout")
-	if is_reply_pending: # in case player skips
+	# says second line, requests player response
+	if is_reply_pending: # skips line in case player skips by pressing r
 		player.stream = lines["request_response"]
 		player.play()
 		emit_signal("assistant_said", "request_response")
-		has_emitted_request = true
 		yield(player, "finished")
 		_waiting()
 
@@ -68,9 +69,8 @@ func _accept():
 
 
 func controls():
-	if not has_emitted_request:
-		emit_signal("assistant_said", "request_response")
 	emit_signal("assistant_said", "controls")
+	has_emitted_controls = true
 	yield(get_tree().create_timer(0.2), "timeout")
 	player.stream = lines["controls"]
 	player.play()
@@ -107,9 +107,12 @@ func arts():
 
 
 func skip():
+	emit_signal("assistant_said", "arts")
+	print("Assistant banished!")
 	is_reply_pending = false
+	player.stream = null
+	player.play()
 	player.stop()
-	queue_free()
 
 
 ################## SCRIPT

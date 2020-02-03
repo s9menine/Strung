@@ -13,7 +13,7 @@ var player_pitches := []
 var is_player_playing := false
 var is_computer_busy := false
 var is_reply_pending := false
-
+var has_skipped := false
 
 func _ready() -> void:
 	$AudioStreamPlayer.stream = $Course.ACKNOWLEDGE
@@ -35,10 +35,9 @@ func _input(event: InputEvent) -> void:
 			yield($AudioStreamPlayer, "finished")
 			repeat()
 	if event.is_action_pressed("skip"): 
-#		is_computer_busy == true
-		var has_skipped := false
-		if has_skipped:
+		if has_skipped == false:
 			$Assistant.skip()
+			is_reply_pending = false
 			has_skipped = true
 			is_computer_busy = false
 		else:
@@ -103,11 +102,12 @@ func repeat():
 		teach()
 
 
+# used to update player note sequence
 func _on_Player_note_played(note_pitch):
 	is_player_playing = true
 	# count too short taps as mistakes
-	yield(get_tree().create_timer(rhythm2secs(0)),"timeout")
-	if is_player_playing == false: 
+	yield(get_tree().create_timer(rhythm2secs(-1)),"timeout")
+	if is_player_playing == false and note_pitch != 0: 
 		player_pitches.clear() 
 		return
 	else:
@@ -116,14 +116,25 @@ func _on_Player_note_played(note_pitch):
 		player_pitches.resize(target_pitches.size())
 		player_pitches.invert()
 		print("Current player sequence is: " + str(player_pitches))
-	if player_pitches == target_pitches and player_pitches != [] and is_computer_busy == false:
-		yield(get_parent().get_node("Player"), "note_released")
-		acknowledge()
 
 
+# used to check if player is mashing keys too fast, and call below function
 func _on_Player_note_released() -> void:
+	print("note released")
 	is_player_playing = false
-#	yield(get_tree().create_timer(rhythm2secs(2)), "timeout")
+	compare_sequences()
+
+
+# used to, well, check if player sequence matches computer
+# called by above function via signals from Player
+func compare_sequences():
+	if target_pitches == []:
+		return
+	print("comparing sequences...")
+	if player_pitches == target_pitches: # and is_computer_busy == false
+		acknowledge()
+	else:
+		return
 
 
 func acknowledge():
@@ -161,6 +172,8 @@ func rhythm2secs(rhythm: int) -> float:
 			secs = time * 0.618 * 0.618
 		0:
 			secs = time * 0.618 * 0.618 * 0.618
+		-1:
+			secs = time * 0.618 * 0.618 * 0.618 * 0.618
 		_: # fallback, same value as "3"
 			secs = time
 	return secs
@@ -182,7 +195,8 @@ func _on_Assistant_assistant_said(content) -> void:
 			is_computer_busy = false
 			teach()
 			yield(self, "teaching_finished")
-			$Assistant.controls()
+			if has_skipped == false:
+				$Assistant.controls()
 		"controls":
 			yield($Assistant/AudioStreamPlayer, "finished")
 			is_computer_busy = false

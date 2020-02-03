@@ -16,6 +16,8 @@ Begin link: [http://www.danvogt.info/] End Link.
 
 ​-----,​-----​​
 
+Thanks to iFire and the Godot Engine Discord for help!
+
 Special thanks to the following for testing and feedback! Love y'all [heart emoji]
 
 Begin list:
@@ -30,6 +32,7 @@ Klyzx
 Kin (Flour)
 ThatOneGuy
 Miri
+涅斯
 
 End list.
 
